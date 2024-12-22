@@ -1,0 +1,7 @@
+<form (submit)="saveUser()">
+    <label>Enter UserName</label>
+    <input type="text" [(ngModel)]="user.username" required name="username"/><br />
+    <label>Enter Password</label>
+    <input type="text" [(ngModel)]="user.password" required name="password"/><br />
+    <input type="submit" />
+</form>

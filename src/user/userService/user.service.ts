@@ -18,4 +18,21 @@ export class UserService {
       responseType:'json'
      });
   }
+  loginUser(User:any):Observable<any>
+  {
+    return this.httpClient.post(this.AUTHURL+'api/auth',User,
+    {
+      responseType:'json'
+    })
+  }
+  // getDataService():Observable<any>
+  // {
+  //   const token=localStorage.getItem('token');
+  //   const headers=new HttpHeaders(
+  //     {
+  //       Authorization:`Bearer ${token}`,
+  //     }
+  //   );
+  //   return this.httpClient.post(this.AUTHURL+'getmessage',null,{headers}); 
+  // }
 }

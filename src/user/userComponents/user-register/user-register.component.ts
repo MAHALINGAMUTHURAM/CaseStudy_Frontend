@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { User } from '../../User';
+import { User } from '../../model/User';
 import { UserService } from '../../userService/user.service';
 import { CommonModule } from '@angular/common';
 import {FormsModule} from '@angular/forms'
@@ -19,9 +19,15 @@ export class UserRegisterComponent {
 
   constructor(private userService:UserService){}
 
-  saveUser()
-  {
-    this.userService.saveUser(this.user).subscribe((e)=>alert(e));
+  saveUser() {
+    this.userService.saveUser(this.user).subscribe(
+      (response) => {
+        alert(JSON.stringify(response)); 
+      },
+      (error) => {
+        console.error('Error saving user:', error);
+        alert(JSON.stringify(error));
+      }
+    );
   }
-
 }

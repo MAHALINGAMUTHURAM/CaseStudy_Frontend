@@ -9,6 +9,7 @@ import { GetByIdHotelComponent } from '../hotel/hotelComponents/get-by-id-hotel/
 import { managerGuard } from '../user/managerGuard/manager.guard';
 import { adminGuard } from '../user/adminGuard/admin.guard';
 import { GetByAmenityHotelComponent } from '../hotel/hotelComponents/get-by-amenity-hotel/get-by-amenity-hotel.component';
+import { UpdateHotelComponent } from '../hotel/hotelComponents/update-hotel/update-hotel.component';
 export const routes: Routes = [
     {
         path:'user/register',component:UserRegisterComponent
@@ -27,5 +28,8 @@ export const routes: Routes = [
     },
     {
         path:'hotel/:amenityId',component:GetByAmenityHotelComponent,canActivate: [userGuard]
+    },
+    { 
+        path: 'hotel/update/:hotelId', component:UpdateHotelComponent,canActivate:[userGuard]
     },
 ];

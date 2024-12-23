@@ -1,0 +1,22 @@
+<h1>Update Hotel Details</h1>
+
+<div *ngIf="hotel">
+  <form (ngSubmit)="updateHotel()">
+    <div>
+      <label for="name">Hotel Name:</label>
+      <input id="name" [(ngModel)]="hotel.name" name="name" required>
+    </div>
+
+    <div>
+      <label for="location">Location:</label>
+      <input id="location" [(ngModel)]="hotel.location" name="location" required>
+    </div>
+
+    <div>
+      <label for="description">Description:</label>
+      <input id="description" [(ngModel)]="hotel.description" name="description" required>
+    </div>
+
+    <button type="submit">Update Hotel</button>
+  </form>
+</div>

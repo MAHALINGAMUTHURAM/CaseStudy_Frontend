@@ -1,6 +1,5 @@
-<div *ngIf="hotelDetails">
-    <h2>Hotel Details</h2>
-    <p>Name: {{ hotelDetails.name }}</p>
-    <p>Description: {{ hotelDetails.description }}</p>
-    <p>Address: {{ hotelDetails.location }}</p>
-</div>
+
+    <div *ngFor="let hotel of hotels">
+      {{ hotel.name }} - {{ hotel.location }} - {{ hotel.description}}
+      <!-- <a  href="/hotel/hotel-details/{{hotel.hotelId}}" routerLink="/hotel/hotel-details/{{hotel.hotelId}}">View Details</a> -->
+    </div>

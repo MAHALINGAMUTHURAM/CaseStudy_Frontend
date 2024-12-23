@@ -11,11 +11,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class GetByAmenityHotelComponent {
 
-hotelDetails: any;
+hotels: any = [];
 amenityId:any
 constructor(private hotelService:HotelService,private activatedRoute:ActivatedRoute) {
 
 }
+
 ngOnInit()
 {
   this.getHotelsByAmenity()
@@ -25,7 +26,7 @@ getHotelsByAmenity(): void {
   this.amenityId=this.activatedRoute.snapshot.params["amenityId"]
   this.hotelService.getHotelsByAmenity(this.amenityId).subscribe({
     next: (data) => {
-      this.hotelDetails = data;
+      this.hotels = data;
       
     },
     error: (err) => {

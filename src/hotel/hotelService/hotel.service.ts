@@ -44,6 +44,14 @@ export class HotelService {
     return this.httpClient.put(this.AUTHURL+`api/hotels/${hotelId}`,hotelData,
     {
      responseType:'json'
-    });  }
+    });  
+  }
+
+  deleteHotel(hotelId: number): Observable<any>{
+    return this.httpClient.delete(this.AUTHURL+`api/hotels/delete/${hotelId}`,
+    {
+     responseType:'json'
+    });
+  }
 
 }

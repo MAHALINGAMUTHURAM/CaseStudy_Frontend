@@ -10,6 +10,7 @@ import { managerGuard } from '../user/managerGuard/manager.guard';
 import { adminGuard } from '../user/adminGuard/admin.guard';
 import { GetByAmenityHotelComponent } from '../hotel/hotelComponents/get-by-amenity-hotel/get-by-amenity-hotel.component';
 import { UpdateHotelComponent } from '../hotel/hotelComponents/update-hotel/update-hotel.component';
+import { DeleteHotelComponent } from '../hotel/hotelComponents/delete-hotel/delete-hotel.component';
 export const routes: Routes = [
     {
         path:'user/register',component:UserRegisterComponent
@@ -32,4 +33,8 @@ export const routes: Routes = [
     { 
         path: 'hotel/update/:hotelId', component:UpdateHotelComponent,canActivate:[userGuard]
     },
+    { 
+        path: 'hotel/delete/:hotelId', component:DeleteHotelComponent,canActivate:[userGuard]
+    },
+
 ];

@@ -20,35 +20,28 @@ export class HotelService {
      });
   }
   getAllHotels(): Observable<any> {
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-      console.error('No token found!');
-      return new Observable();
-    }
-
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     return this.httpClient.get(this.AUTHURL + 'api/hotels/all', {
-      headers: headers,
       responseType: 'json'
     });
   }
 
   getHotelById(hotelId: number): Observable<any> {
-    return this.httpClient.get(this.AUTHURL+'api/hotels/${hoteId}',
+    return this.httpClient.get(this.AUTHURL+`api/hotels/${hotelId}`,
     {
      responseType:'json'
     });
   }
+
   getHotelsByAmenity(amenityId: number): Observable<any> {
-    return this.httpClient.get(this.AUTHURL+'api/hotels/${amenityId}',
+    return this.httpClient.get(this.AUTHURL+`api/hotels/amenity/${amenityId}`,
     {
      responseType:'json'
     });
   }
+
   updateHotel(hotelId: number, hotelData: any): Observable<any> {
-    return this.httpClient.put(this.AUTHURL+'api/hotels/${hotelId}',hotelData,
+    return this.httpClient.put(this.AUTHURL+`api/hotels/${hotelId}`,hotelData,
     {
      responseType:'json'
     });  }

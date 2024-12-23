@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { HotelService } from '../../hotelService/hotel.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink} from '@angular/router';
+
 @Component({
   selector: 'app-getall-hotel',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './getall-hotel.component.html',
   styleUrl: './getall-hotel.component.css'
 })
@@ -26,4 +28,5 @@ export class GetallHotelComponent {
       }
     );
   }
+
 }

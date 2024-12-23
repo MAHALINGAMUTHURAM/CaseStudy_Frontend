@@ -1,8 +1,7 @@
-<div>
     <h1>Hotel List</h1>
     <ul>
       <li *ngFor="let hotel of hotels">
-        {{ hotel.name }} - {{ hotel.location }}
-        <!-- <button (click)="getHotelById(hotel.id)">View Details</button> -->
+        {{ hotel.name }} - {{ hotel.location }} - {{ hotel.description}}
+        <a  href="/hotel/hotel-details/{{hotel.hotelId}}" routerLink="/hotel/hotel-details/{{hotel.hotelId}}">View Details</a>
       </li>
     </ul>

@@ -54,4 +54,11 @@ export class HotelService {
     });
   }
 
+  getHotelsByArea(areaId: number): Observable<any> {
+    return this.httpClient.get(this.AUTHURL+`api/hotels/area/${areaId}`,
+    {
+     responseType:'json'
+    });
+  }
+
 }

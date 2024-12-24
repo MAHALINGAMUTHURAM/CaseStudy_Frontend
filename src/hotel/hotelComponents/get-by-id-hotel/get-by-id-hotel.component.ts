@@ -12,10 +12,8 @@ export class GetByIdHotelComponent {
 
 hotelDetails: any;
 hotelId:any
-constructor(private hotelService:HotelService,private activatedRoute:ActivatedRoute) {
+constructor(private hotelService:HotelService,private activatedRoute:ActivatedRoute) {}
 
-
-}
 ngOnInit()
 {
   this.getHotelById()

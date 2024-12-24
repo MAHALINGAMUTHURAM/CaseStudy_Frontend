@@ -1,0 +1,39 @@
+<!-- Hotel Details Section -->
+<div *ngIf="hotelDetails">
+    <h2>{{ hotelDetails.name }}</h2>
+    <p>{{ hotelDetails.description }}</p>
+    <p><strong>Location:</strong> {{ hotelDetails.location }}</p>
+  </div>
+  
+  <!-- Rooms Available Section -->
+  <div *ngIf="rooms.length > 0">
+    <h3>Rooms Available:</h3>
+    <ul>
+      <li *ngFor="let room of rooms">
+        <strong>Room Number:</strong> {{ room.roomNumber }}
+        <br>
+        <strong>Location:</strong> {{ room.location }}
+        <br>
+        <strong>Location:</strong> {{ room.roomtype.description }}
+        <br>
+        <strong>maxOccupancy:</strong> {{ room.roomtype.maxOccupancy }}
+        <br>
+        <strong>pricePerNight:</strong> {{ room.roomtype.pricePerNight }}
+        <br>
+        <strong>Availability:</strong>
+        
+        <!-- Check if room is available or not -->
+        <span *ngIf="room.available">
+        
+        </span>
+        <span *ngIf="!room.available">Unavailable</span>
+        <br>
+      </li>
+    </ul>
+  </div>
+  
+  <!-- No Rooms Available Section -->
+  <div *ngIf="rooms.length === 0">
+    <p>No rooms available for this hotel.</p>
+  </div>
+  

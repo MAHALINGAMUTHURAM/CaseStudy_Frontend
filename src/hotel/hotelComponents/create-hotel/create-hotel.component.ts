@@ -3,6 +3,7 @@ import { HotelService } from '../../hotelService/hotel.service';
 import { CommonModule } from '@angular/common';
 import {FormsModule} from '@angular/forms'
 import { Hotel } from '../../Hotel';
+
 @Component({
   selector: 'app-create-hotel',
   imports: [CommonModule,FormsModule],
@@ -15,7 +16,7 @@ export class CreateHotelComponent {
   {
     name:'',
     location:'',
-    description:''
+    description:'',
   }
 
   constructor(private hotelService:HotelService){}

@@ -1,0 +1,52 @@
+<div>
+    <h2>Room Management</h2>
+    
+    <!-- Create Room -->
+    <h3>Create Room</h3>
+    <form (ngSubmit)="createRoom()">
+      <input [(ngModel)]="room.roomNumber" name="roomNumber" placeholder="Room Number" required />
+      <input [(ngModel)]="room.location" name="location" placeholder="Location" required />
+      <input [(ngModel)]="room.roomtype.typeName" name="roomType" placeholder="Room Type" required />
+      <input [(ngModel)]="room.isAvailable" name="isAvailable" type="checkbox" /> Available
+      <button type="submit">Create Room</button>
+    </form>
+    
+    <!-- View All Rooms -->
+    <h3>All Rooms</h3>
+    <ul>
+      <li *ngFor="let room of rooms">
+        Room ID: {{ room.roomId }} | Room Number: {{ room.roomNumber }} | Location: {{ room.location }} | Available: {{ room.isAvailable }}
+      </li>
+    </ul>
+    
+    <!-- Get Room by ID -->
+    <h3>Get Room by ID</h3>
+    <input [(ngModel)]="roomId" placeholder="Enter Room ID">
+    <button (click)="loadRoomById()">Get Room</button>
+    <div *ngIf="room.roomId">
+      <p>Room Details: ID: {{ room.roomId }} | Number: {{ room.roomNumber }} | Location: {{ room.location }} | Available: {{ room.isAvailable }}</p>
+    </div>
+  
+    <!-- Update Room -->
+    <h3>Update Room</h3>
+    <input [(ngModel)]="room.roomId" placeholder="Enter Room ID to Update">
+    <input [(ngModel)]="room.roomNumber" placeholder="Room Number">
+    <input [(ngModel)]="room.location" placeholder="Location">
+    <button (click)="updateRoomDetails()">Update Room</button>
+  
+    <!-- Delete Task -->
+    <!-- <h3>Delete Task</h3>
+    <input [(ngModel)]="taskId" placeholder="Enter Task ID">
+    <button (click)="deleteTask()">Delete Task</button> -->
+  
+    <!-- Filter Rooms by Type -->
+    <h3>Get Available Rooms by Type</h3>
+    <input [(ngModel)]="roomTypeId" placeholder="Enter Room Type ID">
+    <button (click)="loadAvailableRoomsByType()">Get Available Rooms</button>
+    <ul>
+      <li *ngFor="let room of availableRooms">
+        Room Number: {{ room.roomNumber }} | Location: {{ room.location }} | Available: {{ room.isAvailable }}
+      </li>
+    </ul>
+  </div>
+  

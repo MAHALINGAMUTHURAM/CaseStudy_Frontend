@@ -1,0 +1,29 @@
+
+<h2>Create New RoomType</h2>
+<form (ngSubmit)="saveRoomType()">
+  <div>
+    <label for="name">Room Type Name</label>
+    <input id="typeName" [(ngModel)]="roomType.typeName" name="typeName" required />
+  </div>
+
+  <div>
+    <label for="description">Description</label>
+    <textarea id="description" [(ngModel)]="roomType.description" name="description"></textarea>
+  </div>
+
+  <div>
+    <label for="description">Description</label>
+    <textarea id="description" [(ngModel)]="roomType.description" name="description"></textarea>
+  </div>
+
+  <div>
+    <label for="maxOccupancy">Maximum Occupancy</label>
+    <textarea id="maxOccupancy" [(ngModel)]="roomType.maxOccupancy" name="maxOccupancy"></textarea>
+  </div>
+
+  <div>
+    <label for="pricePerNight">Price Per Night</label>
+    <textarea id="pricePerNight" [(ngModel)]="roomType.pricePerNight" name="pricePerNight"></textarea>
+  </div>
+  <button type="submit">Create RoomType</button>
+</form>

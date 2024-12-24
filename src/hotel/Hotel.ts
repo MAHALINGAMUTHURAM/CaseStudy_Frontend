@@ -1,3 +1,4 @@
+import { Area } from "../user/area/area";
 export interface Hotel{
 
     hotelId?: number;

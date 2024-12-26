@@ -7,7 +7,7 @@
       <input [(ngModel)]="room.roomNumber" name="roomNumber" placeholder="Room Number" required />
       <input [(ngModel)]="room.location" name="location" placeholder="Location" required />
       <input [(ngModel)]="room.roomtype.typeName" name="roomType" placeholder="Room Type" required />
-      <input [(ngModel)]="room.isAvailable" name="isAvailable" type="checkbox" /> Available
+      <input [(ngModel)]="room.available" name="isAvailable" type="checkbox" /> Available
       <button type="submit">Create Room</button>
     </form>
     
@@ -15,7 +15,7 @@
     <h3>All Rooms</h3>
     <ul>
       <li *ngFor="let room of rooms">
-        Room ID: {{ room.roomId }} | Room Number: {{ room.roomNumber }} | Location: {{ room.location }} | Available: {{ room.isAvailable }}
+        Room ID: {{ room.roomId }} | Room Number: {{ room.roomNumber }} | Location: {{ room.location }} | Available: {{ room.available }}
       </li>
     </ul>
     
@@ -24,7 +24,7 @@
     <input [(ngModel)]="roomId" placeholder="Enter Room ID">
     <button (click)="loadRoomById()">Get Room</button>
     <div *ngIf="room.roomId">
-      <p>Room Details: ID: {{ room.roomId }} | Number: {{ room.roomNumber }} | Location: {{ room.location }} | Available: {{ room.isAvailable }}</p>
+      <p>Room Details: ID: {{ room.roomId }} | Number: {{ room.roomNumber }} | Location: {{ room.location }} | Available: {{ room.available }}</p>
     </div>
   
     <!-- Update Room -->
@@ -45,7 +45,7 @@
     <button (click)="loadAvailableRoomsByType()">Get Available Rooms</button>
     <ul>
       <li *ngFor="let room of availableRooms">
-        Room Number: {{ room.roomNumber }} | Location: {{ room.location }} | Available: {{ room.isAvailable }}
+        Room Number: {{ room.roomNumber }} | Location: {{ room.location }} | Available: {{ room.available }}
       </li>
     </ul>
   </div>

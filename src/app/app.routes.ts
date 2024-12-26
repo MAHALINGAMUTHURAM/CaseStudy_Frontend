@@ -15,6 +15,7 @@ import { CreateRoomTypeComponent } from '../roomType/roomTypeComponents/create-r
 import { CreateRoomComponent } from '../room/roomComponents/create-room/create-room.component';
 import { Home2Component } from '../user/userComponents/home-2/home-2.component';
 import { Home3Component } from '../user/userComponents/home-3/home-3.component';
+import { Home1Component } from '../user/userComponents/home-1/home-1.component';
 export const routes: Routes = [
     {
         path:'user/register',component:UserRegisterComponent
@@ -45,6 +46,9 @@ export const routes: Routes = [
     },
     { 
         path: 'area', component:Home2Component,canActivate:[userGuard]
+    },
+    { 
+        path: 'home', component:Home1Component,canActivate:[userGuard]
     },
 
 ];

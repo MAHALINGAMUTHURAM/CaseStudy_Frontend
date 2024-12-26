@@ -1,4 +1,4 @@
-import { Room } from "../room/Room";
+import { Room } from "../room/room";
 
 export interface Reservation {
     reservationId?: number; 

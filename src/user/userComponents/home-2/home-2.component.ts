@@ -52,6 +52,7 @@ export class Home2Component {
     if (this.selectedArea) {
       this.getHotelsByArea(this.selectedArea);
     }
+    
   }
 
   getHotelsByArea(areaId: number) {
@@ -68,18 +69,19 @@ export class Home2Component {
   onAmenityChange() {
     console.log('Selected Amenity ID:', this.selectedAmenity); 
 
-    this.getHotelsByAmenity(this.selectedAmenity);
+    this.getHotelsByAreaAmenity(this.selectedArea,this.selectedAmenity);
   }
 
-  getHotelsByAmenity(amenityId: number) {
-    this.hotelService.getHotelsByAmenity(amenityId).subscribe({
+  getHotelsByAreaAmenity(areaId: number,amenityId: number) {
+    this.hotelService.getHotelsByAreaandAmenity(areaId,amenityId).subscribe({
       next: (data) => {
         this.hotels = data; 
       },
       error: (err) => {
-        console.error('Error fetching hotels:', err);
+        //console.error('Error fetching hotels:', err);
+        alert(JSON.stringify(err.error)); 
+        this.hotels=[];
       }
     });
   }
 }
-

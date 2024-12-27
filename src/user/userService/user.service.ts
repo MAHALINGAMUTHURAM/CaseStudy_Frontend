@@ -25,4 +25,9 @@ export class UserService {
       responseType:'json'
     })
   }
+  getAllUsers(): Observable<any> {
+    return this.httpClient.get(this.AUTHURL + 'api/users', {
+      responseType: 'json'
+    });
+  }
 }

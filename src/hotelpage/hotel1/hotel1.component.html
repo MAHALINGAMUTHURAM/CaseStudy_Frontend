@@ -1,0 +1,48 @@
+<div class="hotel-list">
+    <h2>Hotel Management</h2>
+  
+    <div *ngIf="isEditing" class="edit-form">
+      <h3>Edit Hotel</h3>
+      <form (ngSubmit)="updateHotel()">
+        <label for="name">Name:</label>
+        <input
+          id="name"
+          [(ngModel)]="selectedHotel.name"
+          name="name"
+          required
+        />
+  
+        <label for="location">Location:</label>
+        <input
+          id="location"
+          [(ngModel)]="selectedHotel.location"
+          name="location"
+          required
+        />
+  
+        <button type="submit">Save Changes</button>
+        <button type="button" (click)="cancelEdit()">Cancel</button>
+      </form>
+    </div>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let hotel of hotels">
+         
+          <td>
+            {{hotel.name}}
+            <button (click)="editHotel(hotel)">Edit</button>
+            <button (click)="deleteHotel(hotel.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

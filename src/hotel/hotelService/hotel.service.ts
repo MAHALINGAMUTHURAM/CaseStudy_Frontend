@@ -61,4 +61,11 @@ export class HotelService {
     });
   }
 
+  getHotelsByAreaandAmenity(areaId: number,amenityId: number):Observable<any> {
+    return this.httpClient.get(this.AUTHURL+`api/hotels/areaAmenity/${areaId}/${amenityId}`,
+    {
+     responseType:'json'
+    });
+  }
+
 }

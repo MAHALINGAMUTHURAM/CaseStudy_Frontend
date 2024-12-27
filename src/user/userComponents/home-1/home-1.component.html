@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
     <label for="areaSelect">Select Area</label>
     <select id="areaSelect" [(ngModel)]="selectedArea" (change)="onAreaChange()">
       <option value="" disabled selected>Select an area</option>
@@ -13,10 +13,17 @@
         <a  href="/hotel/hotel-details/{{hotel.hotelId}}" routerLink="/hotel/hotel-details/{{hotel.hotelId}}">View Details</a>
       </li>
     </ul>
-  </div>
+  </div> -->
   
   <!-- Show message if no hotels are found -->
-  <div *ngIf="hotels.length === 0 && selectedArea">
+  <!-- <div *ngIf="hotels.length === 0 && selectedArea">
     <p>No hotels found for the selected area.</p>
-  </div>
+  </div> -->
+  <!-- <button [routerLink]="['/users']">Users</button> -->
+  <ul>
+   <li *ngFor="let user of users">
+     <span>{{ user.username }} </span>
+ </li>
+ </ul>
+
   

@@ -1,0 +1,27 @@
+<div class="room-list">
+    <h2>Reserved Rooms</h2>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Room Number</th>
+          <th>Location</th>
+          <th>Room Type</th>
+          <th>Price Per Night</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let room of reservedRooms">
+          <td>{{ room.roomNumber }}</td>
+          <td>{{ room.location }}</td>
+          <td>{{ room.roomtype.typeName }}</td>
+          <td>{{ room.roomtype.pricePerNight | currency }}</td>
+          <td>
+            <button (click)="deleteRoom(room.roomId)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

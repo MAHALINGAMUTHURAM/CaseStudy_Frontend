@@ -59,3 +59,19 @@
     <button type="submit">Submit Reservation</button>
   </form>
 </div>
+<div *ngIf="hotelDetails && reviews.length > 0">
+  <h3>Reviews for {{ hotelDetails.name }}:</h3>
+  <ul>
+    <li *ngFor="let review of reviews">
+      <strong>Rating:</strong> {{ review.rating }}<br>
+      <strong>Comment:</strong> {{ review.comment }}<br>
+      <strong>Reviewer:</strong> {{ review.reviewDate }}<br>
+      <hr>
+    </li>
+  </ul>
+</div>
+
+<!-- No Reviews Available Section -->
+<div *ngIf="hotelDetails && reviews.length === 0">
+  <p>No reviews available for this hotel.</p>
+</div>

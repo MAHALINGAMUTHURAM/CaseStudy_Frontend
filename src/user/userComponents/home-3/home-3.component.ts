@@ -7,6 +7,11 @@ import { Room } from '../../../room/room'; // Assuming you have a Room model
 import { Hotel } from '../../../hotel/Hotel';
 import { Reservation } from '../../../reservation/Reservation';
 import { FormsModule } from '@angular/forms';
+import { ReviewService } from '../../../review/reviewService/review.service';
+import { Review } from '../../../review/Review';
+import { Router } from '@angular/router';
+import { ReservationService } from '../../../reservation/reservationService/reservation.service';
+import { json } from 'stream/consumers';
 @Component({
   selector: 'app-home-3',
   imports: [CommonModule,FormsModule],
@@ -17,12 +22,14 @@ export class Home3Component implements OnInit {
 
   hotelDetails: any;
   hotelId: any;  // Explicit type for hotelId
-  rooms: Room[] = [];  // Using Room type for better type safety
+  rooms: Room[] = [];
+    // Using Room type for better type safety
+    reviews: Review[] = [];
   selectedRoom:any;
   reservation: Reservation = {
-    guestName: '',
-    guestEmail: '',
-    guestPhone: '',
+    guest_name: '',
+    guest_email: '',
+    guest_phone: '',
     checkInDate: new Date(),  // default to current date or use a date picker
     checkOutDate: new Date(), // default to current date or use a date picker
 
@@ -42,7 +49,10 @@ export class Home3Component implements OnInit {
   constructor(
     private hotelService: HotelService,
     private activatedRoute: ActivatedRoute,
-    private roomService: RoomService
+    private roomService: RoomService,
+    private reviewService:ReviewService,
+    private reservationService:ReservationService,
+    private router:Router
   ) {}
 
   openBookingForm(room: Room): void {
@@ -54,6 +64,7 @@ export class Home3Component implements OnInit {
     this.hotelId = +this.activatedRoute.snapshot.params["hotelId"];  // Ensure the id is a number
     this.getHotelById();
     this.getAllRooms();
+    this.getReviewsByHotelId(this.hotelId);
   }
 
   getHotelById(): void {
@@ -78,9 +89,30 @@ export class Home3Component implements OnInit {
       }
     });
   }
-  saveReservation():void
-  {
-    this.hotelService.saveHotel(this.reservation).subscribe((e)=>alert(e));
+  saveReservation(): void {
+    this.reservationService.saveReservation(this.reservation).subscribe({
+      next: (response) => {
+        console.log('Reservation saved successfully');
+        // Navigate to the payment page and pass the reservation ID
+        this.router.navigate(['/payment'], { queryParams: { reservationId: response.reservationId } });
+      },
+      error: (err) => {
+        alert(`Error saving reservation: ${err}`);
+        alert(JSON.stringify(err));
+      }
+    });
+  }
+
+  getReviewsByHotelId(hotelId: number): void {
+    this.reviewService.getReviewsByHotelId(hotelId).subscribe(
+      (data) => {
+        this.reviews = data; // Assuming 'reviews' is a component property to store the list of reviews
+        console.log('Reviews fetched successfully', data);
+      },
+      (error) => {
+        console.error('Error fetching reviews by hotel ID', error);
+      }
+    );
   }
 
 

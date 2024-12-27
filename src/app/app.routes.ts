@@ -6,7 +6,7 @@ import { UserLoginComponent } from '../user/userComponents/user-login/user-login
 import { userGuard } from '../user/userGuard/user.guard';
 import { GetallHotelComponent } from '../hotel/hotelComponents/getall-hotel/getall-hotel.component';
 import { GetByIdHotelComponent } from '../hotel/hotelComponents/get-by-id-hotel/get-by-id-hotel.component';
-import { managerGuard } from '../user/managerGuard/manager.guard';
+import { managerGuard } from '../manager/managerGuard/manager.guard';
 import { adminGuard } from '../user/adminGuard/admin.guard';
 import { GetByAmenityHotelComponent } from '../hotel/hotelComponents/get-by-amenity-hotel/get-by-amenity-hotel.component';
 import { UpdateHotelComponent } from '../hotel/hotelComponents/update-hotel/update-hotel.component';
@@ -16,6 +16,8 @@ import { CreateRoomComponent } from '../room/roomComponents/create-room/create-r
 import { Home2Component } from '../user/userComponents/home-2/home-2.component';
 import { Home3Component } from '../user/userComponents/home-3/home-3.component';
 import { Home1Component } from '../user/userComponents/home-1/home-1.component';
+import { Hotel1Component } from '../hotelpage/hotel1/hotel1.component';
+import { Hotel2Component } from '../hotelpage/hotel2/hotel2/hotel2.component';
 export const routes: Routes = [
     {
         path:'user/register',component:UserRegisterComponent
@@ -49,6 +51,12 @@ export const routes: Routes = [
     },
     { 
         path: 'home', component:Home1Component,canActivate:[userGuard]
+    },
+    { 
+        path: 'home1', component:Hotel1Component,canActivate:[userGuard]
+    },
+    { 
+        path: 'home2', component:Hotel2Component,canActivate:[userGuard]
     },
 
 ];

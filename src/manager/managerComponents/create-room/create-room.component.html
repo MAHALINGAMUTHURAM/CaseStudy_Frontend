@@ -1,0 +1,91 @@
+<h1>Room Management</h1>
+
+<button (click)="toggleRoomForm()">Create Room</button>
+
+<div class="form-container">
+    <h2>Create Room</h2>
+    <form (ngSubmit)="saveRoom()">
+      <!-- Room ID -->
+      <div class="form-group">
+        <label for="roomId">Room ID:</label>
+        <input
+          type="text"
+          id="roomId"
+          [(ngModel)]="room.roomId"
+          name="roomId"
+          class="form-control"
+          required
+          placeholder="Enter Room ID"
+        />
+      </div>
+  
+      <!-- Room Number -->
+      <div class="form-group">
+        <label for="roomNumber">Room Number:</label>
+        <input
+          type="text"
+          id="roomNumber"
+          [(ngModel)]="room.roomNumber"
+          name="roomNumber"
+          class="form-control"
+          required
+          placeholder="Enter Room Number"
+        />
+      </div>
+  
+      <!-- Room Type -->
+      <div class="form-group">
+        <label for="roomType">Room Type:</label>
+        <input
+          type="text"
+          id="roomType"
+          [(ngModel)]="room.roomType"
+          name="roomType"
+          class="form-control"
+          required
+          placeholder="Enter Room Type (e.g., Deluxe, Suite)"
+        />
+      </div>
+  
+      <!-- Room Location -->
+      <div class="form-group">
+        <label for="roomLocation">Room Location:</label>
+        <input
+          type="text"
+          id="roomLocation"
+          [(ngModel)]="room.roomLocation"
+          name="roomLocation"
+          class="form-control"
+          required
+          placeholder="Enter Room Location"
+        />
+      </div>
+  
+      <!-- Room Available -->
+      <div class="form-group">
+        <label for="roomAvailable">Room Available:</label>
+        <input
+          type="checkbox"
+          id="roomAvailable"
+          [(ngModel)]="room.roomAvailable"
+          name="roomAvailable"
+          class="form-check-input"
+        />
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary">Save Room</button>
+    </form>
+  </div>
+  
+  <!-- Room List Display -->
+  <div class="room-list" *ngIf="rooms && rooms.length > 0">
+    <h3>Room List</h3>
+    <ul>
+      <li *ngFor="let room of rooms">
+        <strong>{{ room.roomNumber }}</strong> - {{ room.roomType }} 
+        (Location: {{ room.roomLocation }}, Available: {{ room.roomAvailable ? 'Yes' : 'No' }})
+      </li>
+    </ul>
+  </div>
+  

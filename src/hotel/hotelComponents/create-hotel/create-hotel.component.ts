@@ -14,9 +14,12 @@ export class CreateHotelComponent {
 
   hotel:Hotel=
   {
-    name:'',
-    location:'',
-    description:'',
+    name: '',
+    location: '',
+    description: '',
+    area:{
+      name:''
+    }
   }
 
   constructor(private hotelService:HotelService){}

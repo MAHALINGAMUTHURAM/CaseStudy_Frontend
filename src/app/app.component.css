@@ -1,0 +1,197 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: hwb(26 0% 0% / 0.949);
+   */
+   background: rgb(50,7,79);
+background: linear-gradient(90deg, rgba(50,7,79,1) 45%, rgba(253,157,29,1) 100%, rgba(252,176,69,1) 100%);
+  color: white;
+  padding: 10px 20px; /* Adjust spacing */
+  height: 200px; /* Fixed height for alignment */
+  box-sizing: border-box;
+}
+
+.navbar .logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  margin-right: 20px;
+  flex-shrink: 0; /* Prevent the logo from shrinking */
+}
+
+.nav-links {
+  display: flex;
+  flex-grow: 1; /* Allow the nav-links to take up space */
+  justify-content: center; /* Center the navigation links */
+  gap: 20px; /* Space between links */
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  padding: 8px 10px;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #febb02; /* Highlight color on hover */
+}
+
+.user-options {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+  align-items: center;
+}
+
+.user-options .btn {
+  padding: 8px 15px;
+  background-color: white;
+  color: #0071c2;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.user-options .btn:hover {
+  background-color: #0071c2;
+  color: white;
+}
+
+.search-bar1 {
+  position: absolute; /* Enables overlap */
+  top: 170px; /* Adjust to control overlap with the navbar */
+  left: 50%; /* Centers the search bar horizontally */
+  transform: translateX(-50%); /* Centers the search bar based on its width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white; /* Makes the search bar distinct */
+  /* background: rgb(50,7,79);
+background: linear-gradient(90deg, rgba(50,7,79,1) 45%, rgba(253,157,29,1) 100%, rgba(252,176,69,1) 100%); */
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #003580; /* Outer border for the search bar */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 2; /* Ensures it appears above the navbar */
+  width: 80%; /* Adjust width as needed */
+}
+
+.search-input1,
+.search-btn1 {
+  padding: 10px;
+  margin: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.search-input1 {
+  width: 200px;
+}
+
+.search-btn1 {
+  padding: 10px 20px;
+  background-color: #0071c2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.search-btn1:hover {
+  background-color: #ff6600;
+}
+
+/* Style for the date inputs */
+.date-inputs {
+  display: flex;
+  gap: 10px;
+}
+
+.date-inputs label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.date-inputs input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+
+/* Search Info */
+.search-info {
+  background-color: #fff;
+  padding: 15px;
+  text-align: center;
+  margin: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+  background-color: #dfe2e6cd;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.footer-column h3 {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li {
+  margin: 5px 0;
+  font-size: 10px;
+  color: #000;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.footer-bottom .currency {
+  margin-bottom: 10px;
+}
+
+.footer-bottom hr {
+  border: 1px solid #ddd;
+  margin: 10px 0;
+}
+
+.footer-bottom p {
+  font-size: 0.9em;
+  color: #555;
+  margin: 10px 0;
+}
+
+.footer-bottom .logos {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.footer-bottom .logos img {
+  height: 30px;
+}

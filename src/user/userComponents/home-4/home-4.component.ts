@@ -1,18 +1,24 @@
-import { Component } from '@angular/core';
+
+import { Component, Input } from '@angular/core';
 import { Reservation } from '../../../reservation/Reservation';
 import { ActivatedRoute } from '@angular/router';
 import { PaymentService } from '../../../payment/paymentService/payment.service';
 import { ReservationService } from '../../../reservation/reservationService/reservation.service';
+import { Payment } from '../../../payment/Payment';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+declare var Razorpay:any;
 @Component({
   selector: 'app-home-4',
-  imports: [],
+  imports:[CommonModule],
   templateUrl: './home-4.component.html',
-  styleUrl: './home-4.component.css'
+  styleUrls: ['./home-4.component.css']
 })
 export class Home4Component {
 
-  reservationId: number = 0;  // To store the reservation ID
-  reservation: Reservation = {   // Placeholder reservation, can be populated after fetching from the backend
+  @Input() hotel: any;
+
+  @Input() reservation: Reservation = {   
     guest_name: '',
     guest_email: '',
     guest_phone: '',
@@ -31,52 +37,112 @@ export class Home4Component {
       }
     }
   };
-
+  isModalOpen = false;
+  payment:Payment=
+  {
+    reservation: this.reservation,
+    amount: 0,
+    payment_date: new Date(),
+    paymentStatus: "COMPLETED"
+  }
+  
   constructor(
     private activatedRoute: ActivatedRoute,
     private paymentService: PaymentService,
-    private reservationService:ReservationService
+    private reservationService:ReservationService,
+    private router:Router
   ) {}
 
-  ngOnInit(): void {
-    this.reservationId = +this.activatedRoute.snapshot.queryParams['reservationId'];  // Get reservation ID from the URL
+  // Method to calculate the number of nights
+  calculateNumberOfNights(): number {
+    const checkIn = new Date(this.reservation.checkInDate);
+    const checkOut = new Date(this.reservation.checkOutDate);
 
-    // Optionally, fetch the reservation data from backend using the reservationId
-    this.fetchReservationData();
+    // Calculate the difference in time and convert it to days
+    const timeDifference = checkOut.getTime() - checkIn.getTime();
+    const numberOfNights = timeDifference / (1000 * 3600 * 24);
+
+    return numberOfNights;
   }
 
-  fetchReservationData(): void {
-    // Example: Call a service to fetch reservation by ID if needed (you can use your backend API here)
-    this.reservationService.getReservationById(this.reservationId).subscribe(reservation => {
-      this.reservation = reservation;
-
-    });
-
-    console.log('Reservation data:', this.reservation);  // In case you already have the reservation data
+  // Method to calculate the total price for the stay
+  calculateTotalPrice(): number {
+    const numberOfNights = this.calculateNumberOfNights();
+    return numberOfNights * this.reservation.room.roomtype.pricePerNight;
   }
 
+  // Process payment method (uses the calculated price)
   processPayment(): void {
-    const paymentDetails = {
-      reservation:this.reservation,
-      amount: this.reservation.room.roomtype.pricePerNight,
-      paymentDate:Date.now,
-      paymentStatus: "COMPLETED"
-    };
+    console.log('yes');
+    this.payment.amount = this.calculateTotalPrice();
 
-    this.paymentService.savePayment(paymentDetails).subscribe({
-      next: (paymentResponse) => {
-        if (paymentResponse.status === 'success') {
-          alert('Payment successful! Your reservation is confirmed.');
-          // Optionally, update the reservation status to "Paid" in your backend
-        } else {
-          alert('Payment failed. Please try again.');
-        }
-      },
+        // After the reservation is saved, save the payment
+        this.paymentService.savePaymentAndReservation(this.reservation,this.payment).subscribe({
+          next: (paymentResponse) => {
+            alert('Payment successful! Your reservation is confirmed.');
+          },
       error: (err) => {
-        console.error('Error during payment process', err);
-        alert('Payment error. Please try again.');
+        alert(`Error saving reservation: ${err}`);
+        alert(JSON.stringify(err));
       }
     });
-  }
+}
+// ngAfterViewInit() {
+//   // Initialize the modal using jQuery
+//   const modalElement = $('#finalDetailsModal');
+//   modalElement.modal({ show: false });  // Initialize modal but keep it hidden by default
+
+//   // Event listeners to open and close the modal
+//   $('#openModalButton').on('click', () => {
+//     modalElement.modal('show'); // Show the modal when the button is clicked
+//   });
+
+//   $('#closeModalButton').on('click', () => {
+//     modalElement.modal('hide'); // Hide the modal when the close button is clicked
+//   });
+// }
+payNow() {
+  const RazorpayOptions = {
+    key: 'rzp_test_zWhcqYLonnFntk',
+    amount: this.calculateTotalPrice(),
+    currency: 'INR',
+    name: 'Book Inventory',
+    description: 'Sample Razorpay demo',
+    image: 'https://i.imgur.com/FApqk3D.jpeg',
+        prefill: {
+          name: 'Book Inventory',
+          email: 'sam@gmail.com',
+          contact: '9898989898'
+        },
+        theme: {
+          color: '#6466e3'
+        },
+        handler: (response: any) => {
+         
+          console.log('Payment successful. Payment ID:', response.razorpay_payment_id);
+   
+          // Navigate to home after successful payment
+          this.router.navigate(['/home']);
+        },
+        modal: {
+          ondismiss: () => {
+            console.log('Payment modal dismissed');
+          }
+        }
+      };
+   
+      try {
+        const rzp = new Razorpay(RazorpayOptions);
+        rzp.open();
+   
+       
+       
+      } catch (error) {
+        console.error('Error initializing Razorpay:', error);
+      }
+    }
 
 }
+
+
+

@@ -1,0 +1,30 @@
+<!-- <div>
+    <label for="areaSelect">Select Area</label>
+    <select id="areaSelect" [(ngModel)]="selectedArea" (change)="onAreaChange()">
+      <option value="" disabled selected>Select an area</option>
+      <option *ngFor="let area of area" [value]="area.areaId">{{ area.name }}</option>
+    </select>
+  </div>
+  
+<div *ngIf="hotels.length > 0">
+    <h3>Hotels in the selected area:</h3>
+    <ul>
+      <li *ngFor="let hotel of hotels">{{ hotel.name }}
+        <a  href="/hotel/hotel-details/{{hotel.hotelId}}" routerLink="/hotel/hotel-details/{{hotel.hotelId}}">View Details</a>
+      </li>
+    </ul>
+  </div> -->
+  
+  <!-- Show message if no hotels are found -->
+  <!-- <div *ngIf="hotels.length === 0 && selectedArea">
+    <p>No hotels found for the selected area.</p>
+  </div> -->
+  <!-- <button [routerLink]="['/users']">Users</button> -->
+  <ul>
+   <li *ngFor="let user of users">
+     <span>{{ user.username }} </span>
+     <button></button>
+ </li>
+ </ul>
+
+  i

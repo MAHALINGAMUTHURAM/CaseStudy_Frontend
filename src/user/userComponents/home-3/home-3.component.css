@@ -1,0 +1,582 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f5f5f5;
+    color: #333;
+    padding: 20px;
+  }
+ 
+  h1, h2, p {
+    margin: 0;
+  }
+ 
+  /* Header */
+  .navbar {
+    position: relative; /* Keeps the navbar in normal document flow but allows overlapping */
+    width: 100%; /* Full-width navbar */
+    height: 80px; /* Adjust height as needed */
+    background-color: #003580;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1; /* Ensure it's behind the search bar */
+}
+ 
+.nav-links {
+    display: flex;
+}
+ 
+.nav-links a {
+    margin: 0 30px;
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif; /* Change font here */
+}
+ 
+.user-options {
+    display: flex;
+}
+ 
+.user-options .btn {
+    margin-left: 20px;
+    margin-right: 30px;
+    padding: 5px 10px;
+    background-color: white;
+    color: #0071c2;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+}
+ 
+  .change-search-btn {
+    padding: 10px 20px;
+    background-color: #0071c2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .search-bar1 {
+    position: absolute; /* Enables overlap */
+    top: 80px; /* Adjust to control overlap with the navbar */
+    left: 50%; /* Centers the search bar horizontally */
+    transform: translateX(-50%); /* Centers the search bar based on its width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white; /* Makes the search bar distinct */
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #003580; /* Outer border for the search bar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 2; /* Ensures it appears above the navbar */
+    width: 80%; /* Adjust width as needed */
+}
+ 
+  .search-input1,
+  .search-btn1 {
+    padding: 10px;
+    margin: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+ 
+  .search-input1 {
+    width: 200px;
+  }
+ 
+  .search-btn1 {
+    padding: 10px 20px;
+    background-color: #0071c2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+ 
+  .search-btn1:hover {
+    background-color: #ff6600;
+  }
+ 
+  /* Style for the date inputs */
+  .date-inputs {
+    display: flex;
+    gap: 10px;
+  }
+ 
+  .date-inputs label {
+    margin-right: 5px;
+    font-weight: bold;
+  }
+ 
+  .date-inputs input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+ 
+ 
+ 
+  /* Search Info */
+  .search-info {
+    background-color: #fff;
+    padding: 15px;
+    text-align: center;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+ 
+  /* Room Table */
+  /* Room Table */
+.room-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    background-color: #ffffff; /* Keep the table background white */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Updated font */
+    color: #333; /* General text color */
+}
+ 
+table thead {
+    background-color: #004085; /* Darker blue for the header */
+    color: #fff; /* White text for better contrast */
+}
+ 
+table th, table td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+    font-size: 14px; /* Adjusted font size */
+}
+ 
+table th {
+    font-size: 16px;
+    font-weight: bold;
+}
+ 
+table td {
+    font-size: 14px;
+}
+ 
+.room-name {
+    font-weight: bold;
+    color: #0056b3; /* Slightly brighter blue */
+}
+ 
+.highlight {
+    color: #d9534f; /* Bootstrap red for warnings */
+}
+ 
+.original-price {
+    text-decoration: line-through;
+    color: #6c757d; /* Muted gray */
+}
+ 
+.discount-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #28a745; /* Bootstrap green for positive discounts */
+}
+ 
+.discount-percentage {
+    color: #28a745; /* Consistent green */
+}
+ 
+.choices {
+    list-style: none;
+    padding: 0;
+    color: #495057; /* Muted gray for the list */
+}
+ 
+.select-btn {
+    background-color: #0071c2;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+ 
+.select-btn:hover {
+    background-color: #005fa3; /* Darker blue on hover */
+}
+ 
+  /* Search Bar Container */
+.search-bar {
+    padding: 10px 20px;
+    background-color: #fff;
+    border: 1px solid #febb02;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+ 
+  .search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+ 
+  .search-item {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #febb02;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+  }
+ 
+  .search-item span {
+    font-size: 14px;
+    color: #333;
+  }
+ 
+  .search-item i {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #333;
+  }
+ 
+  .search-button {
+    background-color: #0071c2;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+ 
+  .search-button:hover {
+    background-color: #005fa3;
+  }
+ 
+  /* Icons Placeholder */
+  .calendar-icon::before {
+    content: "\1F4C5"; /* Unicode for calendar icon */
+    margin-right: 5px;
+  }
+ 
+  .guests-icon::before {
+    content: "\1F464"; /* Unicode for user icon */
+    margin-right: 5px;
+  }
+  .facilities-section {
+    margin-top: 20px;
+}
+.facilities-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.facilities-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.facility-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1em;
+}
+.facility-icon {
+    font-size: 1.5em;
+    color: green;
+}
+ 
+.hotel-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 70px;
+}
+.hotel-header h1 {
+    font-size: 1.5em;
+    margin: 0;
+}
+.location {
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #007bff;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 images side by side */
+    gap: 10px;
+    margin-top: 20px;
+}
+ 
+.gallery img {
+    width: 100%; /* Adjusted to 100% to fit within the grid columns */
+    border-radius: 6px;
+    border: 5px solid white; /* White border around each image */
+    object-fit: cover; /* Ensures images fill the space without distortion */
+}
+ 
+.highlight {
+    color: #007bff;
+    font-weight: bold;
+}
+.description {
+    margin-top: 20px;
+    font-size: 1em;
+    line-height: 1.6;
+}
+ 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  td {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  h2 {
+    color: #004085;
+  }
+  strong {
+    font-weight: bold;
+  }
+  img {
+    width: 40px;
+    margin-right: 10px;
+  }
+  .sample-text {
+    font-family: 'Georgia', serif; /* Sample font */
+    font-size: 16px;
+    font-style: italic;
+  }
+ 
+  .rating {
+            font-size: 24px;
+            font-weight: bold;
+            color: #004085;
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+ 
+        }
+        .category {
+            display: flex;
+            align-items: center;
+        }
+        .category span {
+            flex: 1;
+        }
+        .progress {
+            height: 8px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            overflow: hidden;
+            flex: 3;
+            margin: 0 10px;
+        }
+        .progress-bar {
+            height: 100%;
+            background: #71acd5;
+        }
+        .tags {
+            margin-bottom: 20px;
+        }
+        .tags button {
+            background: #e7e7e7;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        .slider {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+        .slider-inner {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+        .review {
+            flex: 0 0 30%;
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+        .review .name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .review .name img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .review .country {
+            font-size: 14px;
+            color: gray;
+            margin-bottom: 10px;
+        }
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .slider-controls button {
+            padding: 10px;
+            margin: 0 5px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .slider-controls button:hover {
+            background: #0056b3;
+        }
+        .search-bar1 {
+          position: absolute; /* Enables overlap */
+          top: 170px; /* Adjust to control overlap with the navbar */
+          left: 50%; /* Centers the search bar horizontally */
+          transform: translateX(-50%); /* Centers the search bar based on its width */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: white; /* Makes the search bar distinct */
+          padding: 15px;
+          border-radius: 10px;
+          border: 2px solid #003580; /* Outer border for the search bar */
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          z-index: 2; /* Ensures it appears above the navbar */
+          width: 80%; /* Adjust width as needed */
+        }
+        
+        .search-input1,
+        .search-btn1 {
+          padding: 10px;
+          margin: 5px 10px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+        }
+        
+        .search-input1 {
+          width: 200px;
+        }
+        
+        .search-btn1 {
+          padding: 10px 20px;
+          background-color: #0071c2;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 14px;
+        }
+        
+        .search-btn1:hover {
+          background-color: #ff6600;
+        }
+        
+        /* Style for the date inputs */
+        .date-inputs {
+          display: flex;
+          gap: 10px;
+        }
+        
+        .date-inputs label {
+          margin-right: 5px;
+          font-weight: bold;
+        }
+        
+        .date-inputs input {
+          padding: 5px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+        .booking-form {
+          width: 100%;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #f9f9f9;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .booking-form h3 {
+          text-align: center;
+          color: #333;
+          font-family: Arial, sans-serif;
+        }
+        
+        .booking-form label {
+          display: block;
+          font-size: 14px;
+          margin-bottom: 8px;
+          color: #555;
+        }
+        
+        .booking-form input {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 16px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 14px;
+          color: #333;
+        }
+        
+        .booking-form input:focus {
+          outline: none;
+          border-color: #007BFF;
+        }
+        
+        .booking-form button {
+          width: 100%;
+          padding: 12px;
+          background-color: #003580;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          font-size: 16px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+        
+        .booking-form button:hover {
+          background-color: #0056b3;
+        }
+        
+        .booking-form button:active {
+          background-color: #003d82;
+        }
+        

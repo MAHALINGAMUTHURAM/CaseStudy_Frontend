@@ -1,7 +1,36 @@
-<form (submit)="loginUser()">
-    <label for="userName" >User Name</label>
-    <input type="text" [(ngModel)]="login.userName" name="userName"><br>
-    <label for="">Password</label>
-    <input type="text"[(ngModel)]="login.password" name="password"><br>
-    <input type="submit">
-</form>
+<div class="body-container">
+    <div class="container">
+        <h2>Sign In</h2>
+        <p>You can sign in using your account to access our services.</p>
+        <form class="sign-in-form" (submit)="loginUser()">
+            <input type="text" placeholder="Enter your Username Buddy!" [(ngModel)]="login.userName" name="userName" required>
+            <input type="password" placeholder="Enter your Password" [(ngModel)]="login.password" name="password" required>
+            <div class="continue-box">
+                <button type="submit" class="continue-btn">Continue da!</button>
+            </div>
+            <div class="signin-prompt">
+                Don't have an account <a href='/user/register' [routerLink]="'/user/register'">Create new</a>
+            </div>
+        </form>
+        <div class="social-login">
+            <p>Or sign in with:</p>
+            <div class="social-buttons">
+                <div class="social-box">
+                    <button class="social-btn google">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREDznX-giJlcrcieBqW2p_8bvy0_iVwgZ_Lz-szKxP7eeOvY4kQYayVfTH7FdzZ4OHMyI&usqp=CAU" alt="Google Logo" class="social-logo"> 
+                    </button>
+                </div>
+                <div class="social-box">
+                    <button class="social-btn apple">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo" class="social-logo"> 
+                    </button>
+                </div>
+                <div class="social-box">
+                    <button class="social-btn facebook">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo" class="social-logo"> 
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

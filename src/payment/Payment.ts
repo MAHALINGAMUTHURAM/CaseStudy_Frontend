@@ -4,7 +4,7 @@ export interface Payment {
     paymentId?: number; 
     reservation: Reservation; 
     amount: number;
-    paymentDate: Date; 
+    payment_date: Date; 
     paymentStatus: string;
 }
 

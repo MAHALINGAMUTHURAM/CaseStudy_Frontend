@@ -1,1 +1,104 @@
+<header *ngIf="showNavbar">
+  <div class="navbar">
+    <div class="logo">Booking.com</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Gallery</a>
+      <a href="#">Blog</a>
+      <a href="#">Contact us</a>
+    </div>
+    <div class="user-options" *ngIf="!isAuthenticated()">
+      <button class="btn" [routerLink]="'/user/register'">Register</button>
+      <button class="btn" [routerLink]="'/user/login'" >Sign in</button>
+    </div>
+    <div class="user-options" *ngIf="isAuthenticated()">
+      <button class="btn" (click)="logout()" style="margin-right: 50px;">Logout</button>
+    </div>
+  </div>
+</header>
+
+<!-- New Text Section -->
+
 <router-outlet></router-outlet>
+<footer>
+  <div class="footer-container">
+    <div class="footer-column">
+      <h3>Support</h3>
+      <ul>
+        <li>Coronavirus (COVID-19) FAQs</li>
+        <li>Manage your trips</li>
+        <li>Contact Customer Service</li>
+        <li>Safety resource centre</li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Discover</h3>
+      <ul>
+        <li>Genius loyalty programme</li>
+        <li>Seasonal and holiday deals</li>
+        <li>Travel articles</li>
+        <li>Booking.com for Business</li>
+        <li>Traveller Review Awards</li>
+        <li>Car hire</li>
+        <li>Flight finder</li>
+        <li>Restaurant reservations</li>
+        <li>Booking.com for Travel Agents</li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Terms and settings</h3>
+      <ul>
+        <li>Privacy & cookies</li>
+        <li>Terms and conditions</li>
+        <li>Grievance officer</li>
+        <li>Modern Slavery Statement</li>
+        <li>Human Rights Statement</li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Partners</h3>
+      <ul>
+        <li>Extranet login</li>
+        <li>Partner help</li>
+        <li>List your property</li>
+        <li>Become an affiliate</li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>About</h3>
+      <ul>
+        <li>About Booking.com</li>
+        <li>How we work</li>
+        <li>Sustainability</li>
+        <li>Press centre</li>
+        <li>Careers</li>
+        <li>Investor relations</li>
+        <li>Corporate contact</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="currency">
+      <span>🇮🇳 INR</span>
+    </div>
+    <hr />
+    <p>
+      Booking.com is part of Booking Holdings Inc., the world leader in online
+      travel and related services.<br />
+      Copyright © 1996–2024 Booking.com™. All rights reserved.
+    </p>
+    <div class="logos">
+      <img src="assets/logo.png" alt="Booking.com" />
+      <img src="assets/logo1.png" alt="Priceline" />
+      <img src="assets/logo3.png" alt="Kayak" />
+      <img src="assets/logo4.png" alt="Agoda" />
+      <img src="assets/logo5.png" alt="OpenTable" />
+    </div>
+  </div>
+ </footer>

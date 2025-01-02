@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HotelService } from '../../hotel/hotelService/hotel.service';
-
+import { Room } from '../../room/room';
+import { RoomService } from '../../room/roomService/room.service';
+import { AreaService } from '../../user/area/areaService/area.service';
+import { RoomType } from '../../roomType/roomType';
+import { RoomTypeService } from '../../roomType/roomTypeService/room-type.service';
 @Component({
   selector: 'app-hotel1',
   imports: [CommonModule, FormsModule],
@@ -12,9 +16,23 @@ import { HotelService } from '../../hotel/hotelService/hotel.service';
 export class Hotel1Component implements OnInit {
   hotels: any[] = []; // List of hotels
   selectedHotel: any = {}; // Selected hotel for update
-  isEditing: boolean = false; // To track if editing mode is active
+  isEditingHotel: boolean = false; // To track if editing mode is active
+  isEditingRoom: boolean = false;
+  rooms: Room[] = []; // List of rooms
+  hotelId: any;  // Explicit type for hotelId
+  checkRoom: boolean =false;
+  selectedRoom: any={}; // Currently selected room for editing
+  room:any={};
+  isTrue: boolean=false;
+  isCreateHotel:boolean =false;
+  hotel:any={};
+  selectedArea: any;
+  selectedRoomType:any;
+  roomtypes:RoomType[]=[];
+  //selectedArea: any;
+  area: any[] = [];    
 
-  constructor(private hotelService: HotelService) {}
+  constructor(private hotelService: HotelService,private areaService: AreaService,private roomService:RoomService,private roomTypeService:RoomTypeService) {}
 
   ngOnInit(): void {
     this.getAllHotels(); // Fetch all hotels on component initialization
@@ -32,10 +50,37 @@ export class Hotel1Component implements OnInit {
     });
   }
 
+  getAllRoomTypes(): void {
+    this.roomTypeService.getAllRoomTypes().subscribe({
+      next: (data) => {
+        this.roomtypes = data;
+      },
+      error: (err) => {
+        console.error('Error fetching roomtypes', err);
+      }
+    });
+  }
+
   // Prepare hotel data for editing
   editHotel(hotel: any): void {
-    this.isEditing = true;
+    this.isEditingHotel = true;
     this.selectedHotel = { ...hotel }; // Create a copy to prevent direct modifications
+    this.hotelId=this.selectedHotel.hotelId;
+    this.isEditingRoom=false;
+    this.getAllRooms();
+  }
+
+  getAllRooms(): void {
+    this.roomService.getRoomsByHotelId(this.hotelId).subscribe({
+      next: (data) => {
+        this.rooms = data;
+        console.log('Rooms data:', this.rooms);
+      },
+      error: (err) => {
+        this.checkRoom=true;
+        console.error('Error fetching rooms', err);
+      }
+    });
   }
 
   // Update hotel
@@ -45,7 +90,7 @@ export class Hotel1Component implements OnInit {
         next: (response) => {
           console.log('Hotel updated successfully', response);
           this.getAllHotels(); // Refresh the list
-          this.isEditing = false; // Exit editing mode
+          this.isEditingHotel = false; // Exit editing mode
         },
         error: (err) => {
           console.error('Error updating hotel', err);
@@ -56,7 +101,7 @@ export class Hotel1Component implements OnInit {
 
   // Cancel editing
   cancelEdit(): void {
-    this.isEditing = false;
+    this.isEditingHotel = false;
     this.selectedHotel = {};
   }
 
@@ -73,5 +118,81 @@ export class Hotel1Component implements OnInit {
         }
       });
     }
+  }
+
+  deleteRoom(roomId: number): void {
+    if (confirm('Are you sure you want to delete this room?')) {
+      this.roomService.deleteRoom(roomId).subscribe({
+        next: (response) => {
+          console.log('Room deleted successfully', response);
+          this.getAllRooms(); // Refresh the list
+        },
+        error: (err) => {
+          console.error('Error deleting room', err);
+        }
+      });
+    }
+
+  }
+  editRoom(room: Room): void {
+    this.selectedRoom = { ...room };
+    this.isEditingRoom=true;
+  }
+
+  saveRoom(): void {
+    if (this.selectedRoom) {
+      this.selectedRoom.roomType=this.selectedRoomType;
+      this.roomService.updateRoom(this.selectedRoom.roomId,this.selectedRoom).subscribe({
+        next: (response) => {
+          console.log('Room updated successfully', response);
+          this.getAllRooms();
+          this.selectedRoom = null;
+        },
+        error: (err) => {
+          console.error('Error updating room', err);
+        }
+      });
+    }
+  }
+
+  createRoom(): void {
+    this.room.roomtype=this.selectedRoomType;
+    if (this.room.roomNumber && this.room.location && this.room.roomtype) {
+      this.roomService.saveRoom(this.room).subscribe((newRoom: Room) => {
+        alert('Room created successfully!'); // Reload rooms after creation
+      }, error => {
+        alert('Error creating room: ' + error.message);
+      });
+    } else {
+      alert('Please fill in all room details.');
+    }
+  }
+
+  isCreate()
+  {
+    this.isTrue=true;
+    this.getAllRoomTypes();
+
+  }
+  isHotel()
+  {
+    this.getAllAreas();
+    this.isCreateHotel=true;
+  }
+  saveHotel()
+  {
+    this.hotel.area=this.selectedArea;
+    console.log(this.hotel.area.name);
+    this.hotelService.saveHotel(this.hotel).subscribe((e)=>alert(e));
+  }
+  getAllAreas() {
+    this.areaService.getAllArea().subscribe(
+      (data) => {
+        this.area = data;
+      },
+      (error) => {
+        console.error('Error fetching areas', error);
+      }
+    );
   }
 }

@@ -1,7 +1,30 @@
 <div class="hotel-list">
     <h2>Hotel Management</h2>
-  
-    <div *ngIf="isEditing" class="edit-form">
+<button (click)="isHotel()"></button>
+    <div *ngIf="isCreateHotel">
+    <h2>Create New Hotel</h2>
+    <form (ngSubmit)="saveHotel()">
+      <div>
+        <label for="name">Hotel Name</label>
+        <input id="name" [(ngModel)]="hotel.name" name="name" required />
+      </div>
+      <div>
+        <label for="location">Location</label>
+        <input id="location" [(ngModel)]="hotel.location" name="location" required />
+      </div>
+      <div>
+        <label for="description">Description</label>
+        <textarea id="description" [(ngModel)]="hotel.description" name="description"></textarea>
+      </div>
+      <label for="areaSelect" class="h5 text-white">Select Area</label>
+      <select id="areaSelect" class="form-control" [(ngModel)]="selectedArea" name="area">
+        <option value="" disabled selected>Select an area</option>
+        <option *ngFor="let area of area" [ngValue]="area">{{ area.name }}</option>
+      </select>
+      <button type="submit">Create Hotel</button>
+    </form>
+  </div>
+    <div *ngIf="isEditingHotel" class="edit-form">
       <h3>Edit Hotel</h3>
       <form (ngSubmit)="updateHotel()">
         <label for="name">Name:</label>
@@ -19,6 +42,68 @@
           name="location"
           required
         />
+
+        <label for="description">Location:</label>
+        <input
+          id="description"
+          [(ngModel)]="selectedHotel.description"
+          name="description"
+          required
+        />
+        <button (click)="isCreate()">Create room</button>
+        <div *ngIf="isTrue">
+        <h3>Create Room</h3>
+        <form (ngSubmit)="createRoom()">
+          <input [(ngModel)]="room.roomNumber" name="roomNumber" placeholder="Room Number" required />
+          <input [(ngModel)]="room.location" name="location" placeholder="Location" required />
+          <!-- <input [(ngModel)]="room.roomtype.typeName" name="roomType" placeholder="Room Type" required /> -->
+          <select id="typeSelect" class="form-control" [(ngModel)]="selectedRoomType" name="roomType">
+            <option value="" disabled selected>Select an roomtype</option>
+            <option *ngFor="let roomtype of roomtypes" [ngValue]="roomtype">{{ roomtype.typeName }}</option>
+          </select>
+          <input [(ngModel)]="room.available" name="isAvailable" type="checkbox" /> Available
+          <button type="submit">Create Room</button>
+        </form>
+      </div>
+        <div *ngIf="rooms.length > 0">
+          <h3>Rooms Available:</h3>
+          <ul>
+            <li *ngFor="let room of rooms">
+              <strong>Room Number:</strong> {{ room.roomNumber }}
+              <br>
+              <strong>Location:</strong> {{ room.location }}
+              <br>
+              <strong>Room Type:</strong> {{ room.roomtype.description }}
+              <br>
+              <strong>Max Occupancy:</strong> {{ room.roomtype.maxOccupancy }}
+              <br>
+              <strong>Price Per Night:</strong> {{ room.roomtype.pricePerNight }}
+              <br>
+              <strong>Availability:</strong>
+              
+              <!-- Check if room is available or not -->
+              <span *ngIf="room.available">
+               yes
+              </span>
+              <span *ngIf="!room.available">Unavailable</span>
+              <br>
+              <button (click)="editRoom(room)">Edit</button>
+              <button (click)="deleteRoom(room.roomId)">Delete</button>
+              <div *ngIf="isEditingRoom" class="edit-form">
+              <form (ngSubmit)="saveRoom()">
+                <input [(ngModel)]="selectedRoom.roomNumber" name="roomNumber" placeholder="Room Number" required />
+                <input [(ngModel)]="selectedRoom.location" name="location" placeholder="Location" required />
+                <select id="typeSelect" class="form-control" [(ngModel)]="selectedRoomType" name="roomType">
+                  <option value="" disabled selected>Select an roomtype</option>
+                  <option *ngFor="let roomtype of roomtypes" [ngValue]="roomtype">{{ roomtype.typeName }}</option>
+                </select>
+                <input [(ngModel)]="selectedRoom.available" name="isAvailable" type="checkbox" /> Available
+                <button type="submit">Create Room</button>
+              </form>
+            </div>
+            </li>
+          </ul>
+        </div>
   
         <button type="submit">Save Changes</button>
         <button type="button" (click)="cancelEdit()">Cancel</button>

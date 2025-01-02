@@ -13,7 +13,7 @@ export class Hotel2Component implements OnInit {
 
   rooms: Room[] = []; // List of rooms
   reservedRooms: Room[] = []; // Filtered reserved rooms
-
+  selectedRoom: Room | null = null; // Currently selected room for editing
   constructor(private roomService: RoomService) {}
 
   ngOnInit(): void {

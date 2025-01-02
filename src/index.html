@@ -6,8 +6,25 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
 </head>
 <body>
   <app-root></app-root>
+  <script>
+    // Wait for the balloon to finish moving, then start showing words
+    setTimeout(() => {
+      // Display the message after the balloon finishes
+      document.querySelector('.home-text').style.opacity = 1;
+ 
+      // Gradually reveal each word
+      const words = document.querySelectorAll('.word');
+      words.forEach((word, index) => {
+        setTimeout(() => {
+          word.style.opacity = 1; // Fade in each word
+        }, index * 500); // Delay each word by 500ms
+      });
+    }, 6000); // Wait until balloon finishes moving (6s) before displaying the message
+  </script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthenticateUser } from '../../model/AuthenticateUser';
-import { UserService } from '../../userService/user.service';
+import { AuthenticateUser } from '../../../user/model/AuthenticateUser';
+import { UserService } from '../../../user/userService/user.service';
 import { CommonModule } from '@angular/common';
 import {FormsModule} from '@angular/forms'
 @Component({

@@ -7,7 +7,7 @@ import { userGuard } from '../user/userGuard/user.guard';
 import { GetallHotelComponent } from '../hotel/hotelComponents/getall-hotel/getall-hotel.component';
 import { GetByIdHotelComponent } from '../hotel/hotelComponents/get-by-id-hotel/get-by-id-hotel.component';
 import { managerGuard } from '../manager/managerGuard/manager.guard';
-import { adminGuard } from '../user/adminGuard/admin.guard';
+import { adminGuard } from '../admin/adminGuard/admin.guard';
 import { GetByAmenityHotelComponent } from '../hotel/hotelComponents/get-by-amenity-hotel/get-by-amenity-hotel.component';
 import { UpdateHotelComponent } from '../hotel/hotelComponents/update-hotel/update-hotel.component';
 import { DeleteHotelComponent } from '../hotel/hotelComponents/delete-hotel/delete-hotel.component';
@@ -15,9 +15,11 @@ import { CreateRoomTypeComponent } from '../roomType/roomTypeComponents/create-r
 import { CreateRoomComponent } from '../room/roomComponents/create-room/create-room.component';
 import { Home2Component } from '../user/userComponents/home-2/home-2.component';
 import { Home3Component } from '../user/userComponents/home-3/home-3.component';
-import { Home1Component } from '../user/userComponents/home-1/home-1.component';
+
 import { Hotel1Component } from '../hotelpage/hotel1/hotel1.component';
 import { Hotel2Component } from '../hotelpage/hotel2/hotel2/hotel2.component';
+import { Home4Component } from '../user/userComponents/home-4/home-4.component';
+import { Home1Component } from '../user/userComponents/home-1/home-1.component';
 export const routes: Routes = [
     {
         path:'user/register',component:UserRegisterComponent
@@ -50,13 +52,19 @@ export const routes: Routes = [
         path: 'area', component:Home2Component,canActivate:[userGuard]
     },
     { 
-        path: 'home', component:Home1Component,canActivate:[userGuard]
+        path: 'home', component:Home1Component
     },
     { 
         path: 'home1', component:Hotel1Component,canActivate:[userGuard]
     },
     { 
         path: 'home2', component:Hotel2Component,canActivate:[userGuard]
+    },
+    { 
+        path: 'payment', component:Home4Component,canActivate:[userGuard]
+    },
+    { 
+        path: 'h', component:Hotel1Component,canActivate:[userGuard]
     },
 
 ];

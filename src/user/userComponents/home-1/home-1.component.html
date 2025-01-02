@@ -1,29 +1,167 @@
-<!-- <div>
-    <label for="areaSelect">Select Area</label>
-    <select id="areaSelect" [(ngModel)]="selectedArea" (change)="onAreaChange()">
-      <option value="" disabled selected>Select an area</option>
-      <option *ngFor="let area of area" [value]="area.areaId">{{ area.name }}</option>
-    </select>
-  </div>
-  
-<div *ngIf="hotels.length > 0">
-    <h3>Hotels in the selected area:</h3>
-    <ul>
-      <li *ngFor="let hotel of hotels">{{ hotel.name }}
-        <a  href="/hotel/hotel-details/{{hotel.hotelId}}" routerLink="/hotel/hotel-details/{{hotel.hotelId}}">View Details</a>
-      </li>
-    </ul>
-  </div> -->
-  
-  <!-- Show message if no hotels are found -->
-  <!-- <div *ngIf="hotels.length === 0 && selectedArea">
-    <p>No hotels found for the selected area.</p>
-  </div> -->
-  <!-- <button [routerLink]="['/users']">Users</button> -->
-  <ul>
-   <li *ngFor="let user of users">
-     <span>{{ user.username }} </span>
- </li>
- </ul>
+<section class="search-bar1">
+<h1 style="color:black;" *ngIf="isAuthenticated()">Hi, {{name}}</h1>
+<h1 style="color:black;" *ngIf="!isAuthenticated()">Hi, Guest</h1>
+</section>
+<div class="body-container">
+<div class="balloon-container">
+   <img src="https://media.istockphoto.com/id/466155505/vector/hot-air-balloon-and-clouds.jpg?s=612x612&w=0&k=20&c=leRNSMHRnuKIlBf-1CITwzXey5PklPFuwDeHr-336JE=" alt="Welcome Hot Air Balloon" class="balloon" />
+ </div>
+ <div class="home-text" style="color: brown;">
+   <h1><div class="word">Welcome </div> <span class="word">To </span> <span class="word">Our </span> <span class="word">Booking </span> <span class="word">Site! </span></h1>
+   <p><span class="word">Find </span> <span class="word">The </span> <span class="word">Best </span> <span class="word">Places </span> <span class="word">To </span> <span class="word">Stay.</span>
+   <br>
+   <span class="word">
+    <button [routerLink]="'/area'" class="black-orange-btn">Book Now!</button>
+</span>
+   </p>
+ </div>
+<!-- <div class="home-text">
+   <h1>Welcome to Our Hotel Booking Platform</h1>
+   <p>Your gateway to the most luxurious stays and beautiful destinations.</p>
+</div> -->
 
+<div style="padding: 50px;">
+   <h2>Offers</h2>
   
+
+<section class="offers">
+   <div class="offer-card">
+       <div class="offer-content">
+           <h2>Save on stays worldwide
+             </h2>
+           <p>  Start your year with a sense of adventure, saving 15% or more with Early 2025 Deals.</p>
+           <button class="offer-btn">Save 15% or more</button>
+       </div>
+       <img src="assets/design.png" alt="Airplane" class="offer-image">
+   </div>
+   <div class="offer-card">
+       <div class="offer-content">
+           <h2>Go for a good time, not a long time</h2>
+           <p>Finish your year with a mini break. Save 15% or more when you book and stay by 7 January 2025.</p>
+           <button class="offer-btn">Find Late Escape Deals</button>
+       </div>
+       <img src="assets/design1.png" alt="Kayaking" class="offer-image">
+   </div>
+</section>
+
+<section class="trending">
+   <h2>Trending destinations</h2>
+   <p>Travellers searching for India also booked these</p>
+   <div class="destinations">
+       <div class="destination-card">
+           <img src="assets/design2.png" alt="Chennai">
+           <h3>Chennai <span>🇮🇳</span></h3>
+       </div>
+       <div class="destination-card">
+           <img src="assets/design3.png" alt="Puducherry">
+           <h3>Puducherry <span>🇮🇳</span></h3>
+       </div>
+       <div class="destination-card">
+           <img src="assets/design5.png" alt="Puducherry">
+           <h3>Kerala <span>🇮🇳</span></h3>
+       </div>
+       <div class="destination-card">
+           <img src="assets/design6.png" alt="Puducherry">
+           <h3>Mumbai<span>🇮🇳</span></h3>
+       </div>
+       <div class="destination-card">
+           <img src="assets/design 4.png" alt="Puducherry">
+           <h3>Goa <span>🇮🇳</span></h3>
+       </div>
+   </div>
+</section>
+<div class="container">
+
+   <h2>Homes guests love</h2>
+  
+   <div class="home-list">
+     <div class="home-item">
+       <img src="https://cf.bstatic.com/xdata/images/hotel/square600/95058973.webp?k=c4092495705eab3fad626e8e1a43b1daf7c623e4ea41daf26a201b4417a71709&o=" alt="Oriente Palace Apartments Image">
+       <h3>Oriente Palace Apartments</h3>
+       <p><strong>Centro, Spain, Madrid</strong></p>
+       <p>9.0 Superb · 3,254 reviews</p>
+       <p class="price">Starting from ₹25,813</p>
+     </div>
+    
+     <div class="home-item">
+       <img src="https://cf.bstatic.com/xdata/images/hotel/square600/126708403.webp?k=a137138b895d53d9c0cd31f99f272b833b605441d0670a40c24007fdbb45bb70&o=" alt="Oriente Palace Apartments Image">
+       <h3>P&J Luxury Apartments</h3>
+       <p><strong>Old Town, Poland, Kraków</strong></p>
+       <p>8.1 Very good · 468 reviews</p>
+       <p class="price">Starting from ₹54,687</p>
+     </div>
+
+     <div class="home-item">
+       <img src="https://cf.bstatic.com/xdata/images/hotel/square600/438349362.webp?k=f67f0e7e54be1c0678f18cf9ae1271c4220a487901ae0bf906fed8ba0265e38d&o=" alt="Oriente Palace Apartments Image">
+
+       <h3>Casa Portuguesa Prata</h3>
+       <p><strong>Santa Maria Maior, Portugal, Lisbon</strong></p>
+       <p>7.9 Good · 106 reviews</p>
+       <p class="price">Starting from ₹30,811</p>
+     </div>
+
+     <div class="home-item">
+       <img src= "https://cf.bstatic.com/xdata/images/hotel/square600/270323047.webp?k=bade09d7901e1282156f13c3b39e3a8b9c8d45170b2f1184565d3fc304c42d70&o=" alt="Oriente Palace Apartments Image">
+
+       <h3>Flora Chiado Apartments</h3>
+       <p><strong>Santa Maria Maior, Portugal, Lisbon</strong></p>
+       <p>9.7 Exceptional · 206 reviews</p>
+       <p class="price">Starting from ₹49,507</p>
+     </div>
+   </div>
+ </div>
+<div class="section-title">
+   <h2>Explore India</h2>
+   <p>These popular destinations have a lot to offer</p>
+ </div>
+
+ <div class="destinations1">
+   <div class="destination-card1">
+     <img src="https://media.istockphoto.com/id/470216784/photo/maharajas-palace-at-night-india.jpg?s=612x612&w=0&k=20&c=5QsoVcwHoKteGpB3UxRwy3STJAkOAt4QYKTApoxas9E=" alt="Mysore Palace" width="180" height="120">
+     <h3 style="color: white;">Mysore Palace</h3>
+     <p>1,896 properties</p>
+   </div>
+   <div class="destination-card1">
+       <img src="https://www.tourism-of-india.com/pictures/travel_guide/attractions/taj-mahal-agra-head-252.jpeg" alt="Taj Mahal" width="180" height="120">
+
+     <h3 style="color: white;">Taj Mahal</h3>
+     <p>265 properties</p>
+   </div>
+   <div class="destination-card1">
+     <img src="https://cdn.britannica.com/12/100812-050-27483D5E/Mamallapuram-Shore-Temple-Chennai-India-Tamil-Nadu.jpg" alt="Mamallapuram Shore Temple" width="180" height="120">
+     <h3 style="color: white;">Mamallapuram Shore Temple</h3>
+     <p>183 properties</p>
+   </div>
+   <div class="destination-card1">
+       <img src="https://travelsetu.com/apps/uploads/new_destinations_photos/destination/2023/12/27/5c47137b8b32bdc3702a6c0b4b2359e9_1000x1000.jpg" alt="India Gate" width="180" height="120">
+
+
+     <h3 style="color: white;">India Gate</h3>
+     <p>147 properties</p>
+   </div>
+   <div class="destination-card1">
+     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Indore_Rajwada01.jpg/375px-Indore_Rajwada01.jpg" alt="Indore Rajwada" width="180" height="120">
+    
+     <h3 style="color: white;">Indore Rajwada</h3>
+     <p>143 properties</p>
+   </div>
+   <div class="destination-card1">
+     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Tirumala_090615.jpg/1200px-Tirumala_090615.jpg" alt="Tirupati" width="180" height="120">
+     <h3 style="color: white;">Tirupati</h3>
+     <p>27 properties</p>
+   </div>
+ </div>
+
+ <div class="trip-planner">
+   <h3>Quick and easy trip planner</h3>
+   <p>Pick a vibe and explore the top destinations in the Netherlands</p>
+   <div class="trip-planner-buttons">
+     <div class="planner-button">🏙️ City</div>
+     <div class="planner-button">❤️ Romance</div>
+     <div class="planner-button">🚴 Outdoors</div>
+     <div class="planner-button">🏖️ Beach</div>
+     <div class="planner-button">🧘 Relax</div>
+   </div>
+ </div>
+</div>
+</div>

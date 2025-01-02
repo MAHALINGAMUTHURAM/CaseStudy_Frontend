@@ -1,12 +1,56 @@
 <!-- Hotel Details Section -->
+<!-- <div *ngIf="!next">
 <div *ngIf="hotelDetails">
     <h2>{{ hotelDetails.name }}</h2>
     <p>{{ hotelDetails.description }}</p>
     <p><strong>Location:</strong> {{ hotelDetails.location }}</p>
 </div>
 
-<!-- Rooms Available Section -->
-<div *ngIf="rooms.length > 0">
+<div class="date-range-form">
+  <h2>Select Date Range</h2> -->
+
+  <!-- Form to get start and end dates -->
+  <!-- <form (ngSubmit)="onSubmit()" #dateRangeForm="ngForm">
+    <div class="form-group">
+      <label for="startDate">Start Date:</label>
+      <input
+        type="date"
+        id="startDate"
+        name="startDate"
+        [(ngModel)]="startDate"
+        class="form-control"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="endDate">End Date:</label>
+      <input
+        type="date"
+        id="endDate"
+        name="endDate"
+        [(ngModel)]="endDate"
+        class="form-control"
+        required
+        [min]="startDate"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!dateRangeForm.valid">
+      Submit
+    </button>
+  </form>
+
+  <div *ngIf="dateRangeSubmitted">
+    <h3>Selected Date Range:</h3>
+    <p>Start Date: {{ startDate }}</p>
+    <p>End Date: {{ endDate }}</p>
+  </div>
+</div>
+
+
+Rooms Available Section -->
+<!-- <div *ngIf="rooms.length > 0">
   <h3>Rooms Available:</h3>
   <ul>
     <li *ngFor="let room of rooms">
@@ -20,43 +64,46 @@
       <br>
       <strong>Price Per Night:</strong> {{ room.roomtype.pricePerNight }}
       <br>
-      <strong>Availability:</strong>
+      <strong>Availability:</strong> -->
       
       <!-- Check if room is available or not -->
-      <span *ngIf="room.available">
+      <!-- <span *ngIf="room.available">
         <button (click)="openBookingForm(room)">Book</button>
       </span>
       <span *ngIf="!room.available">Unavailable</span>
       <br>
     </li>
   </ul>
-</div>
+</div> -->
 
 <!-- No Rooms Available Section -->
-<div *ngIf="rooms.length === 0">
-  <p>No rooms available for this hotel.</p>
+<!-- <div *ngIf="!checkRoom">
+  <p>please select Date Range</p>
 </div>
+<div *ngIf="checkRoom">
+  <p>No rooms available</p>
+</div> -->
 
 <!-- Booking Form Section -->
-<div *ngIf="selectedRoom" class="booking-form">
+<!-- <div *ngIf="selectedRoom" class="booking-form">
   <h3>Booking Form for Room Number: {{ selectedRoom.roomNumber }}</h3>
-  <form (ngSubmit)="saveReservation()">
+  <form (ngSubmit)="saveReservation($event)">
     <label for="guestName">Guest Name:</label>
-    <input type="text" id="guestName" [(ngModel)]="reservation.guestName" name="guestName" required />
+    <input type="text" id="guestName" [(ngModel)]="reservation.guest_name" name="guestName" required />
     
     <label for="guestEmail">Guest Email:</label>
-    <input type="email" id="guestEmail" [(ngModel)]="reservation.guestEmail" name="guestEmail" required />
+    <input type="email" id="guestEmail" [(ngModel)]="reservation.guest_email" name="guestEmail" required />
     
     <label for="guestPhone">Guest Phone:</label>
-    <input type="tel" id="guestPhone" [(ngModel)]="reservation.guestPhone" name="guestPhone" required />
+    <input type="tel" id="guestPhone" [(ngModel)]="reservation.guest_phone" name="guestPhone" required /> -->
     
-    <label for="checkInDate">Check-In Date:</label>
+    <!-- <label for="checkInDate">Check-In Date:</label>
     <input type="date" id="checkInDate" [(ngModel)]="reservation.checkInDate" name="checkInDate" required />
     
     <label for="checkOutDate">Check-Out Date:</label>
-    <input type="date" id="checkOutDate" [(ngModel)]="reservation.checkOutDate" name="checkOutDate" required />
+    <input type="date" id="checkOutDate" [(ngModel)]="reservation.checkOutDate" name="checkOutDate" required /> -->
     
-    <button type="submit">Submit Reservation</button>
+    <!-- <button type="submit">Submit Reservation</button>
   </form>
 </div>
 <div *ngIf="hotelDetails && reviews.length > 0">
@@ -70,8 +117,446 @@
     </li>
   </ul>
 </div>
-
+</div> -->
 <!-- No Reviews Available Section -->
-<div *ngIf="hotelDetails && reviews.length === 0">
+<!-- <div *ngIf="hotelDetails && reviews.length === 0">
   <p>No reviews available for this hotel.</p>
 </div>
+<div *ngIf="next">
+<app-home-4 [reservation]="reservation" [hotel]="hotelDetails"> </app-home-4>
+</div> -->
+<div *ngIf="!next">
+  <section class="search-bar1">
+      <!-- Dropdown box -->
+      <!-- <select class="search-input1">
+        <option value="" disabled selected>Select a location</option>
+        <option value="ooty">Ooty</option>
+        <option value="manali">Manali</option>
+        <option value="goa">Goa</option>
+        <option value="delhi">Delhi</option>
+      </select> -->
+
+      <!-- Date input -->
+      <div class="date-inputs">
+          <label for="checkin">Check-in:</label>
+          <input type="date" id="checkin" [(ngModel)]="startDate" class="search-input">
+       
+          <label for="checkout">Check-out:</label>
+          <input type="date" id="checkout" [(ngModel)]="endDate" class="search-input">
+        </div>
+
+      <!-- Guests input -->
+      <select class="search-input1">
+        <option>2 adults · 0 children · 1 room</option>
+        <option>1 adult · 0 children · 1 room</option>
+        <option>2 adults · 2 children · 1 room</option>
+        <option>3 adults · 1 child · 2 rooms</option>
+      </select>
+
+      <!-- Search button -->
+      <button class="search-btn1" (click)="onSubmit()">Search</button>
+    </section>
+
+    <div style="padding-inline: 90px;margin-top: 1px;">
+  <!-- Hotel Title Section -->
+  <div class="hotel-header">
+     <h1 style="margin-top: 50px;text-align: center;">{{ hotelDetails.name }}</h1>
+  </div>
+ 
+  <p class="location">
+      📍 61 Mauritskade, Oost, 1092 AD Amsterdam, Netherlands - <span class="highlight">{{ hotelDetails.description }}</span>
+  </p>
+
+  <!-- Gallery Section -->
+  <div class="gallery">
+      <img src="assets/image.jpg" alt="">
+      <img src="assets/image (1).png">
+      <!-- <img src="download.jfif" alt="">
+      <img src="download (1).jfif" alt=""> -->
+   
+  </div>
+
+  <!-- Hotel Description Section -->
+  <div class="description">
+      <p><strong>Get the celebrity treatment with world-class service at Pillows Grand Boutique Hotel Maurits at the Park - Small Luxury Hotels</strong></p>
+      <p><em>Reliable info:</em> Guests say the description and photos for this property are very accurate.</p><br>
+      <p>Set in Amsterdam, less than 1 km from Artis Zoo, Pillows Grand Boutique Hotel Maurits at the Park - Small Luxury Hotels offers accommodation with a fitness centre, private parking, a garden, and a terrace. Among the facilities of this property are a restaurant, room service, and a 24-hour front desk, along with free WiFi throughout the property. Guests can have a drink at the bar.</p><br>
+      <p>The hotel will provide guests with air-conditioned rooms with a wardrobe, a coffee machine, a minibar, a safety deposit box, a flat-screen TV, and a private bathroom with a shower. Pillows Grand Boutique Hotel Maurits at the Park - Small Luxury Hotels provides some units with city views, and the rooms come with a kettle.</p>
+      <br><p>The daily breakfast offers à la carte, continental or Italian options.</p>
+      <br><p>The area is popular for cycling, and bike hire is available at this 5-star hotel.</p>
+      <br><p>Popular points of interest near the accommodation include Royal Theater Carré, Rembrandt House, and Dutch National Opera & Ballet. Schiphol Airport is 16 km from the property.</p>
+      <br><p>Couples particularly like the location — they rated it 9.1 for a two-person trip.</p>
+  </div>
+
+<div class="facilities-section">
+  <div class="facilities-title">Most popular facilities</div>
+  <div class="facilities-list">
+      <div class="facility-item">
+          <span class="facility-icon">🚭</span>
+          <span>Non-smoking rooms</span>
+      </div>
+      <div class="facility-item">
+          <span class="facility-icon">♿</span>
+          <span>Facilities for disabled guests</span>
+      </div>
+      <div class="facility-item">
+          <span class="facility-icon">🛎️</span>
+          <span>Room service</span>
+      </div>
+      <div class="facility-item">
+          <span class="facility-icon">🍽️</span>
+          <span>2 restaurants</span>
+      </div>
+      <div class="facility-item">
+          <span class="facility-icon">🅿️</span>
+          <span>Private parking</span>
+      </div>
+      <div class="facility-item">
+          <span class="facility-icon">📶</span>
+          <span>Free WiFi</span>
+      </div>
+      <div class="facility-item">
+          <span class="facility-icon">☕</span>
+          <span>Tea/coffee maker in all rooms</span>
+      </div>
+      <div class="facility-item">
+          <span class="facility-icon">🍸</span>
+          <span>Bar</span>
+      </div>
+      <div class="facility-item">
+          <span class="facility-icon">🛏️</span>
+          <span>Children's cots (upon request)</span>
+      </div>
+  </div>
+</div>
+  <!-- Search Info -->
+  <!-- <section class="search-bar">
+      <div class="search-container">
+        <div class="search-item">
+  <form (ngSubmit)="onSubmit()" #dateRangeForm="ngForm">
+    <div class="form-group">
+      <label for="startDate">Start Date:</label>
+      <input
+        type="date"
+        id="startDate"
+        name="startDate"
+        [(ngModel)]="startDate"
+        class="form-control"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="endDate">End Date:</label>
+      <input
+        type="date"
+        id="endDate"
+        name="endDate"
+        [(ngModel)]="endDate"
+        class="form-control"
+        required
+        [min]="startDate"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!dateRangeForm.valid">
+      Submit
+    </button>
+  </form>
+        </div>
+        <div class="search-item">
+          <label for="guests">
+            <i class="guests-icon"></i>
+            <span>2 adults · 0 children · 1 room</span>
+          </label>
+        </div>
+        <button class="search-button">Change search</button>
+      </div>-->
+    <!-- </section> -->
+<!-- No Rooms Available Section -->
+<div *ngIf="!checkRoom">
+  <h1 style="text-align: center;">please select Date Range</h1>
+</div>
+<div *ngIf="checkRoom">
+  <p>No rooms available</p>
+</div>
+  <section class="room-table" *ngFor="let room of rooms">
+    <table>
+      <thead>
+        <tr>
+          <th>Room Type</th>
+          <th>Number of Guests</th>
+          <th>Today's Price</th>
+          <th>Your Choices</th>
+          <th>Select Rooms</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <p class="room-name">{{ room.roomNumber}}</p>
+            <p class="room-name">{{ room.roomtype.typeName }}</p>
+            <p><span class="highlight">{{ room.location }}</span></p>
+            <p><span class="highlight">{{ room.roomtype.description }}</span></p>
+            <!-- <p><span class="highlight">For  people</span></p> -->
+            <p>1 large double bed</p>
+            <ul class="amenities">
+              <li>Air conditioning</li>
+              <li>Private bathroom</li>
+              <li>Free WiFi</li>
+              <li>Flat-screen TV</li>
+            </ul>
+          </td>
+          <td>{{ room.roomtype.maxOccupancy }} Adults</td>
+          <td>
+            <!-- <p class="original-price">{{ room.roomtype.pricePerNight }} per night</p> -->
+            <p class="discount-price">{{ room.roomtype.pricePerNight }} per night</p>
+            <p class="discount-percentage">59% off</p>
+          </td>
+          <td>
+            <ul class="choices">
+              <li>Includes parking + high-speed internet</li>
+              <li>Free cancellation anytime</li>
+              <li>No prepayment needed</li>
+              <li>No credit card needed</li>
+            </ul>
+          </td>
+          <td>
+           
+            <!-- <button class="select-btn">Select and continue</button> -->
+      <span *ngIf="room.available">
+        <button (click)="openBookingForm(room)" class="select-btn">Book</button>
+      </span>
+      <span *ngIf="!room.available">Unavailable</span>
+          </td>
+        </tr>
+        <!-- <tr>
+          <td>
+            <p class="room-name">Deluxe Double Room</p>
+            <p><span class="highlight">Only 3 rooms left on our site</span></p>
+            <p>1 king-size bed</p>
+            <ul class="amenities">
+              <li>Balcony</li>
+              <li>Free WiFi</li>
+              <li>Flat-screen TV</li>
+              <li>Private bathroom</li>
+            </ul>
+          </td>
+          <td>2 Adults</td>
+          <td>
+            <p class="original-price">₹11,800</p>
+            <p class="discount-price">₹4,871</p>
+            <p class="discount-percentage">59% off</p>
+          </td>
+          <td>
+            <ul class="choices">
+              <li>Includes parking + high-speed internet</li>
+              <li>Free cancellation anytime</li>
+              <li>No prepayment needed</li>
+              <li>No credit card needed</li>
+            </ul>
+          </td>
+          <td>
+           
+            <button class="select-btn">Select and continue</button>
+          </td>
+        </tr> -->
+      </tbody>
+    </table>
+    <div *ngIf="selectedRoom" class="booking-form">
+  <h3>Booking Form for Room Number: {{ selectedRoom.roomNumber }}</h3>
+  <form (ngSubmit)="saveReservation($event)">
+    <label for="guestName">Guest Name:</label>
+    <input type="text" id="guestName" [(ngModel)]="reservation.guest_name" name="guestName" required />
+    
+    <label for="guestEmail">Guest Email:</label>
+    <input type="email" id="guestEmail" [(ngModel)]="reservation.guest_email" name="guestEmail" required />
+    
+    <label for="guestPhone">Guest Phone:</label>
+    <input type="tel" id="guestPhone" [(ngModel)]="reservation.guest_phone" name="guestPhone" required /> 
+    
+    <!-- <label for="checkInDate">Check-In Date:</label>
+    <input type="date" id="checkInDate" [(ngModel)]="reservation.checkInDate" name="checkInDate" required />
+    
+    <label for="checkOutDate">Check-Out Date:</label>
+    <input type="date" id="checkOutDate" [(ngModel)]="reservation.checkOutDate" name="checkOutDate" required /> -->
+    
+    <button type="submit">Submit Reservation</button>
+  </form>
+</div>
+    <h2>House Rules</h2>
+<p><strong>Pillows Grand Boutique Hotel Maurits at the Park - Small Luxury Hotels takes special requests - add in the next step!</strong></p>
+
+<table>
+<tr>
+  <td>🗝️</td>
+  <td>Check-in</td>
+  <td>From 15:00 to 00:00<br>Guests are required to show a photo identification and credit card upon check-in</td>
+</tr>
+<tr>
+  <td>⬅️</td>
+  <td>Check-out</td>
+  <td>From 12:00 to 12:30</td>
+</tr>
+<tr>
+  <td>❌💰</td>
+  <td>Cancellation/ prepayment</td>
+  <td>Cancellation and prepayment policies vary according to accommodation type. Please check what conditions may apply to each option when making your selection.</td>
+</tr>
+<tr>
+  <td>👶🛏️</td>
+  <td>Children and beds</td>
+  <td>
+    <strong>Child policies</strong><br>
+    Children of any age are welcome.<br><br>
+    To see correct prices and occupancy information, please add the number of children in your group and their ages to your search.<br><br>
+    <strong>Cot and extra bed policies</strong><br>
+    Prices for cots are not included in the total price, and will have to be paid for separately during your stay.<br><br>
+    The number of cots allowed is dependent on the option you choose. Please check your selected option for more information.<br><br>
+    There are no extra beds available at this property.<br><br>
+    All cots are subject to availability.
+  </td>
+</tr>
+<tr>
+  <td>👩‍🦳∞</td>
+  <td>No age restriction</td>
+  <td>There is no age requirement for check-in</td>
+</tr>
+<tr>
+  <td>💳</td>
+  <td>Paying at this property</td>
+  <td>
+    <img src="assets/visa.png" alt="Visa Logo" />
+    <img src="assets/downloadmastercard.png" alt="MasterCard Logo" />
+    <img src="assets/american.png" alt="American Express Logo" />
+  </td>
+</tr>
+</table>
+
+<p class="sample-text">Staff were absolutely wonderful. Loved our room with the high ceilings, bed was superb. Beautiful gardens. Tranquil setting. Definitely a 5 star hotel.</p>
+  </section>
+<div class="rating">
+
+  Categories:
+</div>
+
+<div class="categories">
+   <div class="category">
+       <span>Staff</span>
+       <div class="progress"><div class="progress-bar" style="width: 97%;"></div></div>
+       <span>9.7</span>
+   </div>
+   <div class="category">
+       <span>Facilities</span>
+       <div class="progress"><div class="progress-bar" style="width: 95%;"></div></div>
+       <span>9.5</span>
+   </div>
+   <div class="category">
+       <span>Cleanliness</span>
+       <div class="progress"><div class="progress-bar" style="width: 97%;"></div></div>
+       <span>9.7</span>
+   </div>
+   <div class="category">
+       <span>Comfort</span>
+       <div class="progress"><div class="progress-bar" style="width: 97%;"></div></div>
+       <span>9.7</span>
+   </div>
+   <div class="category">
+       <span>Value for Money</span>
+       <div class="progress"><div class="progress-bar" style="width: 86%;"></div></div>
+       <span>8.6</span>
+   </div>
+   <div class="category">
+       <span>Location</span>
+       <div class="progress"><div class="progress-bar" style="width: 91%;"></div></div>
+       <span>9.1</span>
+   </div>
+   <div class="category">
+       <span>Free WiFi</span>
+       <div class="progress"><div class="progress-bar" style="width: 96%;"></div></div>
+       <span>9.6</span>
+   </div>
+</div>
+
+<div class="rating">
+   Select topics to read reviews:
+</div>
+
+<div class="tags">
+   <button>+ Room</button>
+   <button>+ Breakfast</button>
+   <button>+ Location</button>
+   <button>+ Restaurant</button>
+   <button>+ Clean</button>
+</div>
+
+<div class="rating">
+   Select topics to read reviews:
+</div>
+
+<div class="slider">
+   <div class="slider-inner">
+    <div *ngIf="hotelDetails && reviews.length === 0">
+  <p>No reviews available for this hotel.</p>
+</div>
+       <div class="review" *ngFor="let review of reviews">
+           <div class="name"><img src="assets\OIP (7).jpg" alt="Steven">Anonymous</div>
+           <div class="country">{{ review.reviewDate }}</div>
+           <p>{{ review.comment }}</p>
+           <p>{{ review.rating }}</p>
+       </div>
+       <!-- <div class="review">
+           <div class="name"><img src="image.png" alt="Alice">Alice</div>
+           <div class="country">United States</div>
+           <p>“Staff were absolutely wonderful. Loved our room with the high ceilings, bed was superb. Beautiful gardens. Tranquil setting. Definitely a 5 star hotel.”</p>
+           <a href="#">Read more</a>
+       </div>
+       <div class="review">
+           <div class="name"><img src="image.png" alt="Alice">Alice</div>
+           <div class="country">United States</div>
+           <p>“Staff were absolutely wonderful. Loved our room with the high ceilings, bed was superb. Beautiful gardens. Tranquil setting. Definitely a 5 star hotel.”</p>
+           <a href="#">Read more</a>
+       </div>
+       <div class="review">
+           <div class="name"><img src="image.png" alt="Alice">Alice</div>
+           <div class="country">United States</div>
+           <p>“Staff were absolutely wonderful. Loved our room with the high ceilings, bed was superb. Beautiful gardens. Tranquil setting. Definitely a 5 star hotel.”</p>
+           <a href="#">Read more</a>
+       </div>
+       <div class="review">
+           <div class="name"><img src="image.png" alt="Ashley">Ashley</div>
+           <div class="country">United Kingdom</div>
+           <p>“The service was sublime, particularly the intro touch at the start of the stay. All details were paid attention to, high-quality materials and facilities, stunning restaurant offering at the Spring cafe. All and all, top tier stay. Looking forward...”</p>
+           <a href="#">Read more</a>
+       </div> -->
+   </div>
+</div>
+</div>
+</div>
+<div *ngIf="next">
+  <app-home-4 [reservation]="reservation" [hotel]="hotelDetails"> </app-home-4>
+  </div>
+<!-- <div class="slider-controls">
+   <button onclick="slide(-1)">❮</button>
+   <button onclick="slide(1)">❯</button>
+</div>
+</div>
+
+
+<script>document.querySelectorAll('.select-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    alert('Room selected! Proceeding to reservation...');
+  });
+});
+
+      let currentSlide = 0;
+
+      function slide(direction) {
+          const sliderInner = document.querySelector('.slider-inner');
+          const reviews = document.querySelectorAll('.review');
+          const totalSlides = reviews.length;
+
+          currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+          sliderInner.style.transform = `translateX(-${currentSlide * 33.33}%)`;
+      }
+  </script> -->

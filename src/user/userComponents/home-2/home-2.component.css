@@ -1,0 +1,235 @@
+/* home-2.component.css or global styles */
+/* .main-container {
+    background-image: url('assets/1724306634_vijay-tvk-1.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 50px 0;
+    background-size: cover; 
+    background-position: center; 
+    padding-top: 20px; 
+    padding-bottom: 50px;
+    height: calc(100vh - 56px);
+  } */
+  
+  /* .text-white {
+    color: white !important;
+  } */
+  /* Ensure the body takes up the full height of the page */
+/* body, html {
+  height: 100%;
+  margin: 0;
+} */
+
+
+
+/* Styling for text to ensure it's visible on top of the background */
+/* .text-white {
+  color: white !important;
+} */
+
+/* Adjust form groups to ensure content is visible on top of the background */
+/* .form-group {
+  margin-bottom: 20px;
+} */
+
+/* Add some spacing between elements in the list */
+/* .list-group-item {
+  margin-bottom: 10px;
+} */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+/* Navbar Styles */
+.navbar {
+  position: relative; /* Keeps the navbar in normal document flow but allows overlapping */
+  width: 100%; /* Full-width navbar */
+  height: 80px; /* Adjust height as needed */
+  background-color: #003580;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1; /* Ensure it's behind the search bar */
+}
+
+.nav-links {
+  display: flex;
+}
+
+.nav-links a {
+  margin: 0 30px;
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif; /* Change font here */
+}
+
+.user-options {
+  display: flex;
+}
+
+.user-options .btn {
+  margin-left: 20px;
+  margin-right: 30px;
+  padding: 5px 10px;
+  background-color: white;
+  color: #0071c2;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Search Bar Styles */
+.search-bar {
+  position: absolute; /* Enables overlap */
+  top: 60px; /* Adjust to control overlap with the navbar */
+  left: 50%; /* Centers the search bar horizontally */
+  transform: translateX(-50%); /* Centers the search bar based on its width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white; /* Makes the search bar distinct */
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #003580; /* Outer border for the search bar */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 2; /* Ensures it appears above the navbar */
+  width: 80%; /* Adjust width as needed */
+}
+
+.search-input {
+  margin: 0 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.search-btn {
+  padding: 10px 20px;
+  background-color: #0071c2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Hotel Results Section */
+.results {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.result-item {
+  display: flex;
+  /* background-color: white; */
+  background: rgb(50,7,79);
+  background: linear-gradient(90deg, rgba(50,7,79,1) 45%, rgba(253,157,29,1) 100%, rgba(252,176,69,1) 100%);
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  width: 90%; /* Adjust width as needed */
+}
+
+.hotel-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.hotel-details h3 {
+  margin: 0;
+  color: white;
+  font-size: 16px;
+}
+
+.hotel-details p {
+  color: gray;
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.book-button {
+  background-color: #0071c2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.book-button:hover {
+  background-color: #496c8c;
+}
+.search-bar1 {
+  position: absolute; /* Enables overlap */
+  top: 170px; /* Adjust to control overlap with the navbar */
+  left: 50%; /* Centers the search bar horizontally */
+  transform: translateX(-50%); /* Centers the search bar based on its width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white; /* Makes the search bar distinct */
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #003580; /* Outer border for the search bar */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 2; /* Ensures it appears above the navbar */
+  width: 80%; /* Adjust width as needed */
+}
+
+.search-input1,
+.search-btn1 {
+  padding: 10px;
+  margin: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.search-input1 {
+  width: 200px;
+}
+
+.search-btn1 {
+  padding: 10px 20px;
+  background-color: #0071c2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.search-btn1:hover {
+  background-color: #ff6600;
+}
+
+/* Style for the date inputs */
+.date-inputs {
+  display: flex;
+  gap: 10px;
+}
+
+.date-inputs label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.date-inputs input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

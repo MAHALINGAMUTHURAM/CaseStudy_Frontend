@@ -4,5 +4,6 @@ export interface Hotel{
     hotelId?: number;
     name:string
     location:string
-    description:string
+    description:string;
+    area:Area;
 }

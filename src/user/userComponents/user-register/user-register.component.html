@@ -1,7 +1,41 @@
-<form (submit)="saveUser()">
+<!-- <form >
     <label>Enter UserName</label>
-    <input type="text" [(ngModel)]="user.username" required name="username"/><br />
+    <input type="text"  required name="username"/><br />
     <label>Enter Password</label>
-    <input type="text" [(ngModel)]="user.password" required name="password"/><br />
+    <input type="text"  required name="password"/><br />
     <input type="submit" />
-</form>
+</form> -->
+<div class="body-container">
+<div class="register-container">
+    <form class="register-form" (submit)="saveUser()">
+        <h2>Create Account</h2>
+
+        <!-- Name Field -->
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required [(ngModel)]="user.username">
+
+        <!-- Password Field -->
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <!-- Confirm Password Field -->
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" required [(ngModel)]="user.password">
+
+        <!-- Register Button -->
+        <button type="submit">Register</button>
+
+        <!-- Sign-In Prompt -->
+        <div class="signin-prompt">
+            Already have an account? <a href='/user/login' [routerLink]="'/user/login'">Sign in</a>
+        </div>
+
+        <!-- Terms and Conditions Section -->
+        <div class="terms-section">
+            By signing in or creating an account, you agree with our
+            <a href="#">Terms & Conditions</a> and
+            <a href="#">Privacy Statement</a>.<br> All rights reserved.
+        </div>
+    </form>
+</div>
+</div>

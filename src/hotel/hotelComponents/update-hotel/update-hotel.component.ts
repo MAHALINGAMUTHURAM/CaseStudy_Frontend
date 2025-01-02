@@ -17,7 +17,10 @@ export class UpdateHotelComponent {
   {
     name:'',
     location:'',
-    description:''
+    description:'',
+    area:{
+      name:''
+    }
   }
 
   hotelId: any;

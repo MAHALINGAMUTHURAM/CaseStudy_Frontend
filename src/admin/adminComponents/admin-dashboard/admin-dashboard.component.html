@@ -21,7 +21,7 @@
     <!-- Manager List -->
     <!-- <h2>Manager List</h2>
     <div class="list-container" id="managerList">
-        <div class="list-item">
+        <div class="list-item">aa
             <h3>Emily Davis</h3>
             <button class="btn" onclick="removeManager('Emily Davis', this)">Remove</button>
         </div>
@@ -39,3 +39,35 @@
         &copy; 2025 User Management System
     </footer>
 </div> -->
+<!-- <div *ngFor="let role of roles">{{role.user.username}}</div> -->
+<div class="container">
+    <h1>Admin Dashboard</h1>
+   
+    <!-- Navigation Buttons with spacing -->
+    <div class="btn-container">
+      <button class="btn" (click)="showUserList()">Show User List</button>
+      <button class="btn" (click)="showManagerList()">Show Manager List</button>
+    </div>
+   
+    <!-- User List -->
+    <div class="list-container" *ngIf="showUser" id="userList">
+      <h2>User List</h2>
+      <div *ngFor="let role of roles" class="list-item">
+        <h3>{{ role.name }} ( {{ role.user.username }})</h3>
+        <button class="btn" (click)="makeManager(role.user.user_id)">Make as Manager</button>
+      </div>
+    </div>
+   
+    <!-- Manager List -->
+    <div class="list-container" *ngIf="showManager" id="managerList">a
+      <h2>Manager List</h2>
+      <div *ngFor="let role of roles" class="list-item">
+        <h3>{{ role.name }} ( {{ role.user.username }})</h3>
+        <!-- <button class="btn" (click)="removeManager(role.user.user_id)">Remove Manager</button> -->
+      </div>
+    </div>
+   
+    <footer>
+      &copy; 2025 User Management System
+    </footer>
+  </div>

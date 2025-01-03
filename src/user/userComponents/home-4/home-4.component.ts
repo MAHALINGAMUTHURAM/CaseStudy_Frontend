@@ -111,7 +111,7 @@ payNow() {
     key: 'rzp_test_zWhcqYLonnFntk',
     amount: this.calculateTotalPrice()*100,
     currency: 'INR',
-    name: 'Book Inventory',
+    name: 'Hotel Booking',
     description: 'Sample Razorpay demo',
     image: 'https://i.imgur.com/FApqk3D.jpeg',
         prefill: {

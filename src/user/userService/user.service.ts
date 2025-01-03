@@ -35,4 +35,18 @@ export class UserService {
       responseType: 'json'
     });
   }
+
+  getRoleByName(name:any):Observable<any>{
+    return this.httpClient.get(this.AUTHURL + `roles/search/${name}`, {
+      responseType: 'json'
+    });
+  }
+
+  makeUserManager(userId:any)
+  {
+    return this.httpClient.put(this.AUTHURL + `api/manager/register/${userId}`, {
+      responseType: 'json'
+    });
+  }
+
 }

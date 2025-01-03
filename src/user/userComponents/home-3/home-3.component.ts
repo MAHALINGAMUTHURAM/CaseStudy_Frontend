@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { ReservationService } from '../../../reservation/reservationService/reservation.service';
 import { json } from 'stream/consumers';
 import { Home4Component } from '../home-4/home-4.component';
+import { UserService } from '../../userService/user.service';
 @Component({
   selector: 'app-home-3',
   imports: [CommonModule,FormsModule,Home4Component],
@@ -34,6 +35,10 @@ export class Home3Component implements OnInit {
     guest_phone: '',
     checkInDate: new Date(),  // default to current date or use a date picker
     checkOutDate: new Date(), // default to current date or use a date picker
+    user:{
+      username:'',
+      password:''
+    },
 
     room: {
       roomId: 0,
@@ -53,6 +58,8 @@ export class Home3Component implements OnInit {
   dateRangeSubmitted: boolean = false;
   checkRoom: boolean =false;
   next: boolean =false;
+  name:any;
+  user:any;
 
   // Method to handle form submission
   onSubmit(): void {
@@ -68,7 +75,8 @@ export class Home3Component implements OnInit {
     private roomService: RoomService,
     private reviewService:ReviewService,
     private reservationService:ReservationService,
-    private router:Router
+    private router:Router,
+    private userService:UserService
   ) {}
 
   openBookingForm(room: Room): void {
@@ -80,6 +88,19 @@ export class Home3Component implements OnInit {
     this.hotelId = +this.activatedRoute.snapshot.params["hotelId"];  // Ensure the id is a number
     this.getHotelById();
     this.getReviewsByHotelId(this.hotelId);
+    this.name=localStorage.getItem('name');
+  }
+
+  getUser()
+  {
+    this.userService.getByUserName(this.name).subscribe({
+      next: (data) => {
+        this.user = data;
+      },
+      error: (err) => {
+        alert(`Error fetching hotel details: ${err}`);
+      }
+    });
   }
 
   getHotelById(): void {
@@ -108,6 +129,7 @@ export class Home3Component implements OnInit {
   }
   saveReservation(evt:any): void {
     evt.preventDefault();
+    this.reservation.user=this.user;
     this.reservation.checkInDate=this.startDate;
     this.reservation.checkOutDate=this.endDate;
     // this.reservationService.saveReservation(this.reservation).subscribe({

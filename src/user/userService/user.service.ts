@@ -30,4 +30,9 @@ export class UserService {
       responseType: 'json'
     });
   }
+  getByUserName(name:any):Observable<any>{
+    return this.httpClient.get(this.AUTHURL + `api/users/${name}`, {
+      responseType: 'json'
+    });
+  }
 }

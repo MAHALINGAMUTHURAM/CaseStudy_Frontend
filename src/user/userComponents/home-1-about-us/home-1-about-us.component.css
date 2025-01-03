@@ -1,0 +1,152 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    line-height: 1.5;
+}
+ 
+/* Navbar */
+.navbar {
+
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+ 
+.navbar .logo {
+    font-size: 22px;
+    color: white;
+    font-weight: bold;
+}
+ 
+.navbar nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 600;
+}
+ 
+.navbar nav a:hover,
+.navbar nav a.active {
+    color: #ffcc00;
+}
+ 
+/* Hero Section */
+.hero {
+    /* background: url('assets/bg2.jpg') no-repeat center center/cover; */
+    background: rgb(50,7,79);
+    background: linear-gradient(90deg, rgba(50,7,79,1) 45%, rgba(253,157,29,1) 100%, rgba(252,176,69,1) 100%);
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative;
+}
+ 
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: #802f0099; */
+    background: rgb(50,7,79);
+    background: linear-gradient(90deg, rgba(50,7,79,1) 45%, rgba(253,157,29,1) 100%, rgba(252,176,69,1) 100%);
+}
+ 
+.hero-content {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+}
+ 
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+ 
+.hero p {
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+ 
+/* About Section */
+.about-container {
+    padding: 40px 20px;
+    text-align: center;
+    background: #ffffff; /* Plain white background */
+    border-top: 2px solid #f1f1f1;
+    border-bottom: 2px solid #f1f1f1;
+}
+ 
+.about-container h2 {
+    font-size: 28px;
+    color: #333; /* Neutral dark color for headings */
+    margin-bottom: 15px;
+}
+ 
+.about-container p {
+    font-size: 16px;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+}
+ 
+/* Features Section */
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+ 
+.feature-card {
+    flex: 1 1 calc(33% - 20px);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+ 
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+ 
+.feature-card h3 {
+    font-size: 18px;
+    color: #003580;
+    margin-bottom: 10px;
+}
+ 
+.feature-card p {
+    font-size: 14px;
+    color: #666;
+}
+ 
+/* Footer */
+.footer {
+    background: #003580;
+    color: white;
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 14px;
+}
+ 
+.footer a {
+    color: #ffcc00;
+    text-decoration: none;
+}
+ 
+.footer a:hover {
+    text-decoration: underline;
+}

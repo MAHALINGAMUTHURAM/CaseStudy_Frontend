@@ -1,4 +1,5 @@
 import { Room } from "../room/room";
+import { User } from "../user/model/User";
 
 export interface Reservation {
     reservationId?: number; 
@@ -8,4 +9,5 @@ export interface Reservation {
     checkInDate: Date; 
     checkOutDate: Date; 
     room: Room; 
+    user:User
 }

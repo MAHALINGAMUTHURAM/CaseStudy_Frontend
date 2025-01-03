@@ -1,0 +1,51 @@
+<!-- <div *ngFor="let reservation of reservationList">{{reservation.guest_name}}</div> -->
+<div class="body-container">
+<h1>List of Reservations</h1>
+<div id="reviewForm" class="review-form-container" style="margin-left: 500px;" *ngIf="isTrue">
+    <h2>Post a Review</h2>
+    <form (ngSubmit)="saveReview()">
+
+        <label for="rating">Rating</label>
+        <select id="rating" required [(ngModel)]="review.rating" name="rating">
+            <option value="" disabled selected>Select Rating</option>
+            <option [value]="1" >⭐</option>
+            <option [value]="2">⭐⭐</option>
+            <option [value]="3">⭐⭐⭐</option>
+            <option [value]="4">⭐⭐⭐⭐</option>
+            <option [value]="5">⭐⭐⭐⭐⭐</option>
+        </select>
+
+        <label for="comment">Comment</label>
+        <textarea id="comment" placeholder="Enter your review" required [(ngModel)]="review.comment" name="comment"></textarea>
+
+        <button type="submit" class="submit">Submit Review</button>
+    </form>
+    </div>
+<table *ngFor="let reservation of reservationList">
+    <thead >
+        <tr>
+            <th>Name</th>
+            <th>Hotel</th>
+            <th>Room Number</th>
+            <th>Check-in Date</th>
+            <th>Check-out Date</th>
+            <th>Post Review</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{reservation.guest_name}}</td>
+            <td>{{reservation.room.hotel.name}}</td>
+            <td>{{reservation.room.roomNumber}}</td>
+            <td>{{reservation.checkInDate}}</td>
+            <td>{{reservation.checkOutDate}}</td>
+            <td><button (click)="postReview(reservation)">Post Review</button></td>
+        </tr>
+        <!-- <tr>
+            <td>2025-01-07</td>
+            <td>2025-01-12</td>
+            <td><button onclick="postReview(2)">Post Review</button></td>
+        </tr> -->
+    </tbody>
+</table>
+</div>

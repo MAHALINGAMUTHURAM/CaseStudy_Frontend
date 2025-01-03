@@ -20,6 +20,12 @@ import { Hotel1Component } from '../hotelpage/hotel1/hotel1.component';
 import { Hotel2Component } from '../hotelpage/hotel2/hotel2/hotel2.component';
 import { Home4Component } from '../user/userComponents/home-4/home-4.component';
 import { Home1Component } from '../user/userComponents/home-1/home-1.component';
+import { Home1ReviewComponent } from '../user/userComponents/home-1-review/home-1-review.component';
+import { Home1BlogComponent } from '../user/userComponents/home-1-blog/home-1-blog.component';
+import { Home1AboutUsComponent } from '../user/userComponents/home-1-about-us/home-1-about-us.component';
+import { Home1GalleryComponent } from '../user/userComponents/home-1-gallery/home-1-gallery.component';
+import { Home1ContactComponent } from '../user/userComponents/home-1-contact/home-1-contact.component';
+import { AdminDashboardComponent } from '../admin/adminComponents/admin-dashboard/admin-dashboard.component';
 export const routes: Routes = [
     {
         path:'user/register',component:UserRegisterComponent
@@ -66,5 +72,24 @@ export const routes: Routes = [
     { 
         path: 'h', component:Hotel1Component,canActivate:[userGuard]
     },
+    { 
+        path: 'reviews', component:Home1ReviewComponent
+    },
+    { 
+        path: 'blogs', component:Home1BlogComponent
+    },
+    { 
+        path: 'aboutUs', component:Home1AboutUsComponent
+    },
+    { 
+        path: 'gallery', component:Home1GalleryComponent
+    },
+    { 
+        path: 'contact', component:Home1ContactComponent
+    },
+    { 
+        path: 'adminDashboard', component:AdminDashboardComponent
+    },
+
 
 ];

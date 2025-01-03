@@ -29,6 +29,12 @@ export class ReservationService {
     });
   }
 
+  getReservationByUser(name: any): Observable<any> {
+    return this.httpClient.get(this.AUTHURL + `api/reservation/user/${name}`, {
+      responseType: 'json'
+    });
+  }
+
   getReservationsByDateRange(startDate: Date, endDate: Date): Observable<any> {
     const start = startDate.toISOString().split('T')[0]; // Format to YYYY-MM-DD
     const end = endDate.toISOString().split('T')[0]; // Format to YYYY-MM-DD

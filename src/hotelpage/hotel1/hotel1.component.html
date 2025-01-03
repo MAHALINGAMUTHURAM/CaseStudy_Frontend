@@ -1,3 +1,26 @@
+<!-- <button (click)="showEditForm = true">edit</button>
+
+<div class="modal" [class.show]="showEditForm">
+  <div class="modal-content">
+    <span class="close" (click)="showEditForm = false">&times;</span>
+    <h2>Edit Order</h2>
+   <form (ngSubmit)="updateHotel()">
+
+    <label>name:</label>
+    <input/>
+    <button (click)="showEditForm = false">
+      cancel
+    </button>
+   </form>
+    
+  </div>
+</div>
+
+<button
+class="btn btn-primary btn-sm me-1"
+(click)="isEditingHotel = true">
+Edit
+</button>
 <div class="hotel-list">
     <h2>Hotel Management</h2>
 <button (click)="isHotel()"></button>
@@ -55,8 +78,8 @@
         <h3>Create Room</h3>
         <form (ngSubmit)="createRoom()">
           <input [(ngModel)]="room.roomNumber" name="roomNumber" placeholder="Room Number" required />
-          <input [(ngModel)]="room.location" name="location" placeholder="Location" required />
-          <!-- <input [(ngModel)]="room.roomtype.typeName" name="roomType" placeholder="Room Type" required /> -->
+          <input [(ngModel)]="room.location" name="location" placeholder="Location" required /> 
+          <input [(ngModel)]="room.roomtype.typeName" name="roomType" placeholder="Room Type" required />
           <select id="typeSelect" class="form-control" [(ngModel)]="selectedRoomType" name="roomType">
             <option value="" disabled selected>Select an roomtype</option>
             <option *ngFor="let roomtype of roomtypes" [ngValue]="roomtype">{{ roomtype.typeName }}</option>
@@ -81,7 +104,6 @@
               <br>
               <strong>Availability:</strong>
               
-              <!-- Check if room is available or not -->
               <span *ngIf="room.available">
                yes
               </span>
@@ -124,10 +146,185 @@
           <td>
             {{hotel.name}}
             <button (click)="editHotel(hotel)">Edit</button>
-            <button (click)="deleteHotel(hotel.id)">Delete</button>
+            <button (click)="deleteHotel(hotel.hotelId)">Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
-  </div>
+  </div> -->
   
+    <div class="hotel-list">
+      <h2>Hotel Management</h2>
+      <button (click)="isHotel()"></button>
+      <div *ngIf="isCreateHotel">
+        <h2>Create New Hotel</h2>
+        <form (ngSubmit)="saveHotel()" #hotelForm="ngForm">
+          <div>
+            <label for="name">Hotel Name</label>
+            <input
+              id="name"
+              [(ngModel)]="hotel.name"
+              name="name"
+              required
+              minlength="3"
+              #hotelName="ngModel" />
+            <div *ngIf="hotelName.invalid && hotelName.touched" class="error-message">
+              <small *ngIf="hotelName.errors?.['required']">Hotel Name is required.</small>
+              <small *ngIf="hotelName.errors?.['minlength']">Hotel Name must be at least 3 characters long.</small>
+            </div>
+          </div>
+     
+          <div>
+            <label for="location">Location</label>
+            <input
+              id="location"
+              [(ngModel)]="hotel.location"
+              name="location"
+              required
+              minlength="3"
+              #hotelLocation="ngModel" />
+            <div *ngIf="hotelLocation.invalid && hotelLocation.touched" class="error-message">
+              <small *ngIf="hotelLocation.errors?.['required']">Location is required.</small>
+              <small *ngIf="hotelLocation.errors?.['minlength']">Location must be at least 3 characters long.</small>
+            </div>
+          </div>
+     
+          <div>
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              [(ngModel)]="hotel.description"
+              name="description"
+              maxlength="500"
+              #hotelDescription="ngModel"></textarea>
+            <div *ngIf="hotelDescription.invalid && hotelDescription.touched" class="error-message">
+              <small *ngIf="hotelDescription.errors?.['maxlength']">Description cannot exceed 500 characters.</small>
+            </div>
+          </div>
+     
+          <label for="areaSelect" class="h5 text-white">Select Area</label>
+          <select
+            id="areaSelect"
+            class="form-control"
+            [(ngModel)]="selectedArea"
+            name="area"
+            required
+            #areaSelect="ngModel">
+            <option value="" disabled selected>Select an area</option>
+            <option *ngFor="let area of area" [ngValue]="area">{{ area.name }}</option>
+          </select>
+          <div *ngIf="areaSelect.invalid && areaSelect.touched" class="error-message">
+            <small *ngIf="areaSelect.errors?.['required']">Area selection is required.</small>
+          </div>
+     
+          <button type="submit" [disabled]="hotelForm.invalid">Create Hotel</button>
+        </form>
+      </div>
+     
+      <div *ngIf="isEditingHotel" class="edit-form">
+        <h3>Edit Hotel</h3>
+        <form (ngSubmit)="updateHotel()" #editHotelForm="ngForm">
+          <label for="name">Name:</label>
+          <input
+            id="name"
+            [(ngModel)]="selectedHotel.name"
+            name="name"
+            required
+            minlength="3"
+            #editHotelName="ngModel" />
+          <div *ngIf="editHotelName.invalid && editHotelName.touched" class="error-message">
+            <small *ngIf="editHotelName.errors?.['required']">Hotel Name is required.</small>
+            <small *ngIf="editHotelName.errors?.['minlength']">Hotel Name must be at least 3 characters long.</small>
+          </div>
+     
+          <label for="location">Location:</label>
+          <input
+            id="location"
+            [(ngModel)]="selectedHotel.location"
+            name="location"
+            required
+            minlength="3"
+            #editHotelLocation="ngModel" />
+          <div *ngIf="editHotelLocation.invalid && editHotelLocation.touched" class="error-message">
+            <small *ngIf="editHotelLocation.errors?.['required']">Location is required.</small>
+            <small *ngIf="editHotelLocation.errors?.['minlength']">Location must be at least 3 characters long.</small>
+          </div>
+     
+          <label for="description">Location:</label>
+          <input
+            id="description"
+            [(ngModel)]="selectedHotel.description"
+            name="description"
+            required
+            #editHotelDescription="ngModel" />
+          <div *ngIf="editHotelDescription.invalid && editHotelDescription.touched" class="error-message">
+            <small *ngIf="editHotelDescription.errors?.['required']">Description is required.</small>
+          </div>
+     
+          <button (click)="isCreate()">Create room</button>
+          <div *ngIf="isTrue">
+            <h3>Create Room</h3>
+            <form (ngSubmit)="createRoom()" #createRoomForm="ngForm">
+              <input
+                [(ngModel)]="room.roomNumber"
+                name="roomNumber"
+                placeholder="Room Number"
+                required
+                #roomNumber="ngModel" />
+              <div *ngIf="roomNumber.invalid && roomNumber.touched" class="error-message">
+                <small *ngIf="roomNumber.errors?.['required']">Room Number is required.</small>
+              </div>
+     
+              <input
+                [(ngModel)]="room.location"
+                name="location"
+                placeholder="Location"
+                required
+                #roomLocation="ngModel" />
+              <div *ngIf="roomLocation.invalid && roomLocation.touched" class="error-message">
+                <small *ngIf="roomLocation.errors?.['required']">Location is required.</small>
+              </div>
+     
+              <select
+                id="typeSelect"
+                class="form-control"
+                [(ngModel)]="selectedRoomType"
+                name="roomType"
+                required
+                #roomTypeSelect="ngModel">
+                <option value="" disabled selected>Select a room type</option>
+                <option *ngFor="let roomtype of roomtypes" [ngValue]="roomtype">{{ roomtype.typeName }}</option>
+              </select>
+              <div *ngIf="roomTypeSelect.invalid && roomTypeSelect.touched" class="error-message">
+                <small *ngIf="roomTypeSelect.errors?.['required']">Room type is required.</small>
+              </div>
+     
+              <input
+                [(ngModel)]="room.available"
+                name="isAvailable"
+                type="checkbox" />
+              <button type="submit" [disabled]="createRoomForm.invalid">Create Room</button>
+            </form>
+          </div>
+        </form>
+      </div>
+     
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let hotel of hotels">
+            <td>
+              {{ hotel.name }}
+              <button (click)="editHotel(hotel)">Edit</button>
+              <button (click)="deleteHotel(hotel.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>

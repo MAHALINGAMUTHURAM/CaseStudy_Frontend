@@ -24,6 +24,10 @@ export class Home4Component {
     guest_phone: '',
     checkInDate: new Date(),
     checkOutDate: new Date(),
+    user:{
+      username:'',
+      password:''
+    },
     room: {
       roomId: 0,
       roomNumber: 0,
@@ -80,6 +84,7 @@ export class Home4Component {
         this.paymentService.savePaymentAndReservation(this.reservation,this.payment).subscribe({
           next: (paymentResponse) => {
             alert('Payment successful! Your reservation is confirmed.');
+            // this.processPayment();
           },
       error: (err) => {
         alert(`Error saving reservation: ${err}`);
@@ -104,7 +109,7 @@ export class Home4Component {
 payNow() {
   const RazorpayOptions = {
     key: 'rzp_test_zWhcqYLonnFntk',
-    amount: this.calculateTotalPrice(),
+    amount: this.calculateTotalPrice()*100,
     currency: 'INR',
     name: 'Book Inventory',
     description: 'Sample Razorpay demo',
@@ -122,6 +127,7 @@ payNow() {
           console.log('Payment successful. Payment ID:', response.razorpay_payment_id);
    
           // Navigate to home after successful payment
+          this.processPayment();
           this.router.navigate(['/home']);
         },
         modal: {

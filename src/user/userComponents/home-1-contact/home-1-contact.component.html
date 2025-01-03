@@ -1,0 +1,53 @@
+<div class="body-container">
+<div class="contact-container">
+    <h2>Contact Us</h2>
+    <p>If you have any questions or need assistance, feel free to reach out to us using the form below.</p>
+
+    <!-- Contact Form -->
+    <div class="contact-form">
+        <form id="contact-form" action="submit_contact.php" method="POST" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+                <span id="name-error" style="color: red;"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+                <span id="email-error" style="color: red;"></span>
+            </div>
+
+            <!-- Ratings Section -->
+            <div class="form-group">
+                <label for="rating">Rate Us:</label>
+                <div class="rating">
+                    <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                    <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                    <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                    <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                    <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+                </div>
+                <span id="rating-error" style="color: red;"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                <span id="message-error" style="color: red;"></span>
+            </div>
+
+            <div class="form-group">
+                <!-- Submit Button -->
+                <button type="submit" class="btn">Submit</button>
+            </div>
+        </form>
+        <!-- Terms & Conditions Section -->
+        <div class="terms-section">
+            By signing in or creating an account, you agree with our
+            <a href="#">Terms & Conditions</a> and
+            <a href="#">Privacy Statement</a>.<br> All rights reserved.
+        </div>
+    </div>
+</div>
+</div>

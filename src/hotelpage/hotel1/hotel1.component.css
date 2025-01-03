@@ -1,0 +1,134 @@
+.hotel-list {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+ 
+  h2 {
+    font-size: 2rem;
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+ 
+  h3 {
+    font-size: 1.5rem;
+    color: #2980b9;
+    margin-top: 20px;
+  }
+ 
+  .edit-form {
+    background-color: #ecf0f1;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+ 
+  /* Styling for table */
+  table {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+  }
+ 
+  table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+ 
+  table th {
+    background-color: #2980b9;
+    color: white;
+  }
+ 
+  /* Styling for action buttons (Edit & Delete) */
+  .button-container {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+  }
+ 
+  .edit-btn, .delete-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+ 
+  .edit-btn {
+    background-color: #3498db;
+    color: white;
+  }
+ 
+  .delete-btn {
+    background-color: #e74c3c;
+    color: white;
+  }
+ 
+  /* Button hover effects */
+  .edit-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+  }
+ 
+  .delete-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+  }
+ 
+  /* Button Disabled State */
+  .edit-btn:disabled, .delete-btn:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+  }
+ 
+  /* Cancel Button Styling */
+  .cancel-btn {
+    background-color: #e74c3c;
+    color: white;
+  }
+ 
+  .cancel-btn:hover {
+    background-color: #c0392b;
+  }
+ 
+  /* General form inputs */
+  input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+ 
+  /* Styling for the form buttons */
+  .button-group {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+  }
+ 
+  button {
+    padding: 12px 24px;
+    font-size: 1rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+ 
+  button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+  }

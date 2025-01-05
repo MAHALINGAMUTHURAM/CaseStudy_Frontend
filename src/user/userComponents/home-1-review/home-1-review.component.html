@@ -21,6 +21,60 @@
         <button type="submit" class="submit">Submit Review</button>
     </form>
     </div>
+    <div *ngIf="isEdit" class="review-form-container">
+    <form (ngSubmit)="onSubmit()">
+        <!-- Guest Name -->
+        <div>
+          <label for="guest_name">Guest Name</label>
+          <input id="guest_name" [(ngModel)]="reservation.guest_name" name="guest_name" type="text" required />
+          <div *ngIf="!reservation.guest_name">
+            <small>Guest name is required.</small>
+          </div>
+        </div>
+      
+        <!-- Guest Email -->
+        <div>
+          <label for="guest_email">Guest Email</label>
+          <input id="guest_email" [(ngModel)]="reservation.guest_email" name="guest_email" type="email" required />
+          <div *ngIf="!reservation.guest_email">
+            <small>Guest email is required.</small>
+          </div>
+        </div>
+      
+        <!-- Guest Phone -->
+        <div>
+          <label for="guest_phone">Guest Phone</label>
+          <input id="guest_phone" [(ngModel)]="reservation.guest_phone" name="guest_phone" type="text" required />
+          <div *ngIf="!reservation.guest_phone">
+            <small>Guest phone is required.</small>
+          </div>
+        </div>
+      
+        <!-- Check-In Date -->
+        <div>
+          <label for="checkInDate">Check-In Date</label>
+          <input id="checkInDate" [(ngModel)]="reservation.checkInDate" name="checkInDate" type="date" required />
+          <div *ngIf="!reservation.checkInDate">
+            <small>Check-In date is required.</small>
+          </div>
+        </div>
+      
+        <!-- Check-Out Date -->
+        <div>
+          <label for="checkOutDate">Check-Out Date</label>
+          <input id="checkOutDate" [(ngModel)]="reservation.checkOutDate" name="checkOutDate" type="date" required />
+          <div *ngIf="!reservation.checkOutDate">
+            <small>Check-Out date is required.</small>
+          </div>
+        </div>
+      
+      
+        <!-- Submit Button -->
+        <button type="submit" [disabled]="!reservation.guest_name || !reservation.guest_email || !reservation.guest_phone || !reservation.checkInDate">
+          Submit
+        </button>
+      </form>
+    </div>
 <table *ngFor="let reservation of reservationList">
     <thead >
         <tr>
@@ -30,6 +84,7 @@
             <th>Check-in Date</th>
             <th>Check-out Date</th>
             <th>Post Review</th>
+            <th>Update</th>
         </tr>
     </thead>
     <tbody>
@@ -40,6 +95,7 @@
             <td>{{reservation.checkInDate}}</td>
             <td>{{reservation.checkOutDate}}</td>
             <td><button (click)="postReview(reservation)">Post Review</button></td>
+            <td><button (click)="editReservation(reservation)">Update</button></td>
         </tr>
         <!-- <tr>
             <td>2025-01-07</td>

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../../user/userService/user.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.css'
 })
@@ -56,7 +57,7 @@ export class AdminDashboardComponent {
         console.error(data);
       },
       (error) => {
-        console.error('Error fetching users', error);
+        alert(JSON.stringify(error));
       }
     );
   }

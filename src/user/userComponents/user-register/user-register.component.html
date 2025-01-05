@@ -1,41 +1,65 @@
-<!-- <form >
-    <label>Enter UserName</label>
-    <input type="text"  required name="username"/><br />
-    <label>Enter Password</label>
-    <input type="text"  required name="password"/><br />
-    <input type="submit" />
-</form> -->
 <div class="body-container">
-<div class="register-container">
-    <form class="register-form" (submit)="saveUser()">
+    <div class="register-container">
+      <form class="register-form" (submit)="saveUser()">
         <h2>Create Account</h2>
-
+  
         <!-- Name Field -->
         <label for="name">Name</label>
-        <input type="text" id="name" name="name" required [(ngModel)]="user.username">
-
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          required 
+          [(ngModel)]="user.username" 
+          #username="ngModel"
+        />
+        <div *ngIf="username.invalid && username.touched">
+          <small *ngIf="username.errors?.['required']" style="color: red;">Name is required.</small>
+        </div>
+  
         <!-- Password Field -->
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
-
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          required 
+          [(ngModel)]="user.password" 
+          #password="ngModel"
+          minlength="8"
+        />
+        <div *ngIf="password.invalid && password.touched">
+          <small *ngIf="password.errors?.['required']" style="color: red;">Password is required.</small>
+          <small *ngIf="password.errors?.['minlength']" style="color: red;">Password must be at least 8 characters long.</small>
+        </div>
+  
         <!-- Confirm Password Field -->
         <label for="confirm-password">Confirm Password</label>
-        <input type="password" id="confirm-password" name="confirm-password" required [(ngModel)]="user.password">
+        <input 
+          type="password" 
+          id="confirm-password" 
+          name="confirm-password" 
+          required 
+        />
 
+  
         <!-- Register Button -->
-        <button type="submit">Register</button>
-
+        <button type="submit" [disabled]="username.invalid || password.invalid">
+          Register
+        </button>
+  
         <!-- Sign-In Prompt -->
         <div class="signin-prompt">
-            Already have an account? <a href='/user/login' [routerLink]="'/user/login'">Sign in</a>
+          Already have an account? <a href='/user/login' [routerLink]="'/user/login'">Sign in</a>
         </div>
-
+  
         <!-- Terms and Conditions Section -->
         <div class="terms-section">
-            By signing in or creating an account, you agree with our
-            <a href="#">Terms & Conditions</a> and
-            <a href="#">Privacy Statement</a>.<br> All rights reserved.
+          By signing in or creating an account, you agree with our
+          <a href="#">Terms & Conditions</a> and
+          <a href="#">Privacy Statement</a>.<br> All rights reserved.
         </div>
-    </form>
-</div>
-</div>
+      </form>
+    </div>
+  </div>
+  

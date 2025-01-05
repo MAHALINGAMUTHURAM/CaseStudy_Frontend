@@ -1,73 +1,59 @@
-<!-- <div class="container">
-    <h1>Admin Dashboard</h1> -->
-
-    <!-- User List -->
-    <!-- <h2>User List</h2>
-    <div class="list-container" id="userList">
-        <div class="list-item">
-            <h3>John Doe</h3>
-            <button class="btn" onclick="makeManager('John Doe')">Make as Manager</button>
-        </div>
-        <div class="list-item">
-            <h3>Jane Smith</h3>
-            <button class="btn" onclick="makeManager('Jane Smith')">Make as Manager</button>
-        </div>
-        <div class="list-item">
-            <h3>Robert Brown</h3>
-            <button class="btn" onclick="makeManager('Robert Brown')">Make as Manager</button>
-        </div>
-    </div> -->
-
-    <!-- Manager List -->
-    <!-- <h2>Manager List</h2>
-    <div class="list-container" id="managerList">
-        <div class="list-item">aa
-            <h3>Emily Davis</h3>
-            <button class="btn" onclick="removeManager('Emily Davis', this)">Remove</button>
-        </div>
-        <div class="list-item">
-            <h3>Michael Johnson</h3>
-            <button class="btn" onclick="removeManager('Michael Johnson', this)">Remove</button>
-        </div>
-        <div class="list-item">
-            <h3>Sarah Wilson</h3>
-            <button class="btn" onclick="removeManager('Sarah Wilson', this)">Remove</button>
-        </div>
-    </div>
-
-    <footer>
-        &copy; 2025 User Management System
-    </footer>
-</div> -->
-<!-- <div *ngFor="let role of roles">{{role.user.username}}</div> -->
 <div class="container">
-    <h1>Admin Dashboard</h1>
-   
-    <!-- Navigation Buttons with spacing -->
-    <div class="btn-container">
-      <button class="btn" (click)="showUserList()">Show User List</button>
-      <button class="btn" (click)="showManagerList()">Show Manager List</button>
-    </div>
-   
-    <!-- User List -->
-    <div class="list-container" *ngIf="showUser" id="userList">
-      <h2>User List</h2>
-      <div *ngFor="let role of roles" class="list-item">
-        <h3>{{ role.name }} ( {{ role.user.username }})</h3>
-        <button class="btn" (click)="makeManager(role.user.user_id)">Make as Manager</button>
-      </div>
-    </div>
-   
-    <!-- Manager List -->
-    <div class="list-container" *ngIf="showManager" id="managerList">a
-      <h2>Manager List</h2>
-      <div *ngFor="let role of roles" class="list-item">
-        <h3>{{ role.name }} ( {{ role.user.username }})</h3>
-        <!-- <button class="btn" (click)="removeManager(role.user.user_id)">Remove Manager</button> -->
-      </div>
-    </div>
-   
-    <footer>
-      &copy; 2025 User Management System
-    </footer>
+  <h1>Admin Dashboard</h1>
+ 
+  <!-- Navigation Buttons with spacing -->
+  <div class="btn-container">
+    <button class="btn" (click)="showUserList()">Show User List</button>
+    <button class="btn" (click)="showManagerList()">Show Manager List</button>
+    <button class="btn" [routerLink]="'/managerDashboard'">Show Manager Dashboard</button>
   </div>
+ 
+  <!-- User List -->
+  <div class="list-container" *ngIf="showUser" id="userList">
+    <h2>User List</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <!-- <th>Role</th> -->
+          <th>Username</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let role of roles">
+          <!-- <td>{{ role.name }}</td> -->
+          <td>{{ role.user.username }}</td>
+          <td>
+            <button class="btn" (click)="makeManager(role.user.user_id)">Make as Manager</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+ 
+  <!-- Manager List -->
+  <div class="list-container" *ngIf="showManager" id="managerList">
+    <h2>Manager List</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <!-- <th>Role</th> -->
+          <th>Username</th>
+          <!-- <th>Action</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let role of roles">
+          <!-- <td>{{ role.name }}</td> -->
+          <td>{{ role.user.username }}</td>
+          <!-- Uncomment the button below if you want to allow removing managers -->
+          <!-- <td><button class="btn" (click)="removeManager(role.user.user_id)">Remove Manager</button></td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+ 
+  <footer>
+    &copy; 2025 User Management System
+  </footer>
+</div>

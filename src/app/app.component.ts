@@ -47,7 +47,7 @@ export class AppComponent {
       const currentRoute = this.router.url; // full URL
       console.log(currentRoute); // Log for debugging
 
-      if (currentRoute === '/user/register' || currentRoute === '/user/login') {
+      if (currentRoute === '/user/register' || currentRoute === '/user/login' ||currentRoute === '/admin/login' || currentRoute === '/manager/login' ) {
         this.showNavbar = false;
       } else {
         this.showNavbar = true;

@@ -26,6 +26,10 @@ import { Home1AboutUsComponent } from '../user/userComponents/home-1-about-us/ho
 import { Home1GalleryComponent } from '../user/userComponents/home-1-gallery/home-1-gallery.component';
 import { Home1ContactComponent } from '../user/userComponents/home-1-contact/home-1-contact.component';
 import { AdminDashboardComponent } from '../admin/adminComponents/admin-dashboard/admin-dashboard.component';
+import { ManagerLoginComponent } from '../manager/managerComponents/manager-login/manager-login.component';
+import { AdminLoginComponent } from '../admin/adminComponents/admin-login/admin-login.component';
+import { AmenityComponent } from '../amenityComponents/amenity.component';
+import { PaymentComponent } from '../paymentComponents/payment.component';
 export const routes: Routes = [
     {
         path:'user/register',component:UserRegisterComponent
@@ -34,7 +38,13 @@ export const routes: Routes = [
         path:'user/login',component:UserLoginComponent
     },
     {
-        path:'hotel/create',component:CreateHotelComponent,canActivate: [managerGuard,adminGuard]
+        path:'manager/login',component:ManagerLoginComponent
+    },
+    {
+        path:'admin/login',component:AdminLoginComponent
+    },
+    {
+        path:'hotel/create',component:CreateHotelComponent,canActivate: [managerGuard]
     },
     {
         path:'hotel/all',component:GetallHotelComponent,canActivate: [userGuard]
@@ -46,10 +56,10 @@ export const routes: Routes = [
         path:'hotel/:amenityId',component:GetByAmenityHotelComponent,canActivate: [userGuard]
     },
     { 
-        path: 'hotel/update/:hotelId', component:UpdateHotelComponent,canActivate:[userGuard]
+        path: 'hotel/update/:hotelId', component:UpdateHotelComponent,canActivate:[managerGuard]
     },
     { 
-        path: 'hotel/delete/:hotelId', component:DeleteHotelComponent,canActivate:[userGuard]
+        path: 'hotel/delete/:hotelId', component:DeleteHotelComponent,canActivate:[managerGuard]
     },
     { 
         path: 'room', component:CreateRoomComponent,canActivate:[userGuard]
@@ -58,22 +68,25 @@ export const routes: Routes = [
         path: 'area', component:Home2Component,canActivate:[userGuard]
     },
     { 
-        path: 'home', component:Home1Component
+        path: 'amenity', component:AmenityComponent,canActivate:[managerGuard]
     },
     { 
-        path: 'home1', component:Hotel1Component,canActivate:[userGuard]
+        path: 'home1', component:Hotel1Component,canActivate:[adminGuard]
     },
     { 
-        path: 'home2', component:Hotel2Component,canActivate:[userGuard]
+        path: 'managerDashboard', component:Hotel2Component,canActivate:[managerGuard]
     },
     { 
         path: 'payment', component:Home4Component,canActivate:[userGuard]
     },
     { 
-        path: 'h', component:Hotel1Component,canActivate:[userGuard]
+        path: 'manager/payment', component:PaymentComponent,canActivate:[managerGuard]
     },
     { 
         path: 'reviews', component:Home1ReviewComponent
+    },
+    { 
+        path: 'home', component:Home1Component
     },
     { 
         path: 'blogs', component:Home1BlogComponent
@@ -88,7 +101,7 @@ export const routes: Routes = [
         path: 'contact', component:Home1ContactComponent
     },
     { 
-        path: 'adminDashboard', component:AdminDashboardComponent
+        path: 'adminDashboard', component:AdminDashboardComponent,canActivate:[adminGuard]
     },
 
 

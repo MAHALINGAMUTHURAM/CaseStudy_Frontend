@@ -1,33 +1,71 @@
 <div class="hotel-list">
   <h2>Hotel Management</h2>
-  <button (click)="isHotel()">Create New Hotel</button>
+  <button (click)="isHotel()" style="margin-right: 5px;">Add New Hotel</button>
+  <button  [routerLink]="'/amenity'" style="margin-right: 5px;">Show Amenities</button>
+  <button  [routerLink]="'/manager/payment'" style="margin-right: 5px;">Show payments</button>
+  <button (click)="isCreateRoomType = true">Create Room Type</button>
 
+  <div *ngIf="isCreateRoomType">
+    <h3>Create Room Type</h3>
+    <form (ngSubmit)="saveRoomType()" #roomTypeForm="ngForm">
+        <label for="roomTypeName">Room Type Name:</label>
+        <input id="roomTypeName" [(ngModel)]="newRoomType.typeName" name="roomTypeName" required minlength="3" />
+       
+        <label for="maxOccupancy">Max Occupancy:</label>
+        <input id="maxOccupancy" [(ngModel)]="newRoomType.maxOccupancy" name="maxOccupancy" type="number" required min="1" />
+       
+        <label for="pricePerNight">Price Per Night:</label>
+        <input id="pricePerNight" [(ngModel)]="newRoomType.pricePerNight" name="pricePerNight" type="number" required min="0" />
+       
+        <button type="submit">Save Changes</button>
+        <button (click)="editRoomType(roomtypes)">Edit</button>
+        <button type="button" (click)="cancel()">Cancel</button>
+      </form>
+  </div>
+
+  <!-- Edit Room Type Form -->
+  <div *ngIf="isEditingRoomType">
+      <h3>Edit Room Type</h3>
+      <form (ngSubmit)="updateRoomType()" #editRoomTypeForm="ngForm">
+          <label for="editRoomTypeName">Room Type Name:</label>
+          <input id="editRoomTypeName" [(ngModel)]="selectedRoomType.typeName" name="editRoomTypeName" required minlength="3"/>
+         
+          <label for="editMaxOccupancy">Max Occupancy:</label>
+          <input id="editMaxOccupancy" [(ngModel)]="selectedRoomType.maxOccupancy" name="editMaxOccupancy" type="number" required min="1"/>
+         
+          <label for="editPricePerNight">Price Per Night:</label>
+          <input id="editPricePerNight" [(ngModel)]="selectedRoomType.pricePerNight" name="editPricePerNight" type="number" required min="0"/>
+         
+          <button type="submit">Update Room Type</button>
+          <button type="button" (click)="cancel()">Cancel</button>
+      </form>
+  </div>
   <div *ngIf="isCreateHotel">
-      <h2>Create New Hotel</h2>
+      <h2>Add New Hotel</h2>
       <form (ngSubmit)="saveHotel()">
           <div>
-              <label for="name">Hotel Name</label>
+              <label for="name" class="h5 text-black">Hotel Name</label>
               <input id="name" [(ngModel)]="hotel.name" name="name" required />
           </div>
           <div>
-              <label for="location">Location</label>
+              <label for="location" class="h5 text-black">Location</label>
               <input id="location" [(ngModel)]="hotel.location" name="location" required />
           </div>
           <div>
-              <label for="description">Description</label>
+              <label for="description" class="h5 text-black">Description</label>
               <textarea id="description" [(ngModel)]="hotel.description" name="description"></textarea>
           </div>
-          <label for="areaSelect" class="h5 text-white">Select Area</label>
+          <label for="areaSelect" class="h5 text-black">Select Area</label>
           <select id="areaSelect" class="form-control" [(ngModel)]="selectedArea" name="area">
               <option value="" disabled selected>Select an area</option>
               <option *ngFor="let area of area" [ngValue]="area">{{ area.name }}</option> <!-- Ensure 'areas' is used -->
           </select>
  
           <!-- Create Hotel Button -->
-          <button type="submit">Create Hotel</button>
+          <button type="submit">Add Hotel</button>
  
           <!-- Cancel Button -->
-          <button type="button" (click)="cancel()">Cancel</button> Add Cancel button
+          <button type="button" (click)="cancel()">Cancel</button>
       </form>
   </div>
  
@@ -59,14 +97,23 @@
       ></textarea>
 
       <!-- Create Room Button -->
-      <button type="button" (click)="isCreate()">Create Room</button>
+      <button type="button" (click)="isCreate()">Add Room</button>
 
       <!-- Save Changes Button -->
       <button type="submit">Save Changes</button>
+      <button type="button" (click)="cancel()">Cancel</button>
   </form>
+  <h3>Add Amenity to this Hotel</h3>
+  <form (ngSubmit)="saveHotelAmenity()">
+  <select id="typeSelect" class="form-control" [(ngModel)]="selectedAmenity" name="selectedAmenity">
+    <option value="" disabled selected>Select an Amenity</option>
+    <option *ngFor="let amenity of amenities" [ngValue]="amenity">{{ amenity.name }}</option>
+  </select>
+  <button type="submit">Add</button>
+</form>
 </div>
       <div *ngIf="isTrue">
-      <h3>Create Room</h3>
+      <h3>Add Room</h3>
       <form (ngSubmit)="createRoom()">
         <input [(ngModel)]="room.roomNumber" name="roomNumber" placeholder="Room Number" required />
         <input [(ngModel)]="room.location" name="location" placeholder="Location" required />
@@ -75,8 +122,9 @@
           <option value="" disabled selected>Select an roomtype</option>
           <option *ngFor="let roomtype of roomtypes" [ngValue]="roomtype">{{ roomtype.typeName }}</option>
         </select>
-        <input [(ngModel)]="room.available" name="isAvailable" type="checkbox" /> Available
-        <button type="submit">Create Room</button>
+        <!-- <input [(ngModel)]="room.available" name="isAvailable" type="checkbox" />  <span>Available</span> -->
+        <button type="submit">Add Room</button>
+        <button type="button" (click)="cancelAddRoom()">Cancel</button>
       </form>
     </div>
       <div *ngIf="rooms.length > 0">
@@ -111,9 +159,24 @@
                 <option value="" disabled selected>Select an roomtype</option>
                 <option *ngFor="let roomtype of roomtypes" [ngValue]="roomtype">{{ roomtype.typeName }}</option>
               </select>
-              <input [(ngModel)]="selectedRoom.available" name="isAvailable" type="checkbox" /> Available
-              <button type="submit">Create Room</button>
+              <div class="checkbox-container">
+                <input 
+                  [(ngModel)]="selectedRoom.available" 
+                  name="isAvailable" 
+                  type="checkbox" 
+                  id="availableCheckbox" 
+                />
+                <label for="availableCheckbox" class="checkbox-label">Available</label>
+              </div>              <button type="submit">Update Room</button>
             </form>
+            <h3>Add Amenity to this Room</h3>
+            <form (ngSubmit)="saveRoomAmenity()">
+            <select id="typeSelect" class="form-control" [(ngModel)]="selectedAmenity" name="selectedAmenity">
+              <option value="" disabled selected>Select an Amenity</option>
+              <option *ngFor="let amenity of amenities" [ngValue]="amenity">{{ amenity.name }}</option>
+            </select>
+            <button type="submit">Add</button>
+          </form>
           </div>
           </li>
         </ul>
@@ -135,8 +198,8 @@
         <td>{{ hotel.name }}</td>
         <td>{{ hotel.location }}</td>
         <td class="actions">
-            <button class="btn btn-sm" (click)="editHotel(hotel)">Edit</button>
-            <button class="btn btn-sm" (click)="deleteHotel(hotel.hotelId)">Delete</button>
+            <button class="btn btn-sm" style="background-color: rgb(50,7,79);" (click)="editHotel(hotel)">Edit</button>
+            <button class="btn btn-sm danger" style="background-color: red;" (click)="deleteHotel(hotel.hotelId)">Delete</button>
         </td>
     </tr>
 </tbody>

@@ -147,13 +147,22 @@ body {
   border-radius: 5px;
   margin-right: 20px;
 }
+.amenities-label {
+  font-size: 16px; /* Adjusts text size */
+   /* Makes the label text bold */
+  color: #333; /* Sets label text color */
+  white-space: nowrap; /* Prevents text wrapping */
+}
 
 .hotel-details h3 {
   margin: 0;
   color: white;
   font-size: 16px;
 }
-
+.error {
+  color: red;
+  font-size: 0.9em;
+}
 .hotel-details p {
   color: gray;
   margin: 5px 0;

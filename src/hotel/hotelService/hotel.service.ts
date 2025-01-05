@@ -41,7 +41,7 @@ export class HotelService {
   }
 
   updateHotel(hotelId: number, hotelData: any): Observable<any> {
-    return this.httpClient.put(this.AUTHURL+`api/hotels/${hotelId}`,hotelData,
+    return this.httpClient.put(this.AUTHURL+`api/hotels/update/${hotelId}`,hotelData,
     {
      responseType:'json'
     });  

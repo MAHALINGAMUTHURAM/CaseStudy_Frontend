@@ -10,9 +10,9 @@ export class PaymentService {
   private AUTHURL: string = "http://localhost:8056/";
 
   constructor(private httpClient: HttpClient) { }
-  savePaymentAndReservation(reservation: any, payment: any): Observable<any> {
+  savePaymentAndReservation(reservation: any, payment: any,name:any): Observable<any> {
     const payload = { reservation, payment }; // Combining both data into a single payload
-    return this.httpClient.post(this.AUTHURL + 'api/payment/post', payload, { responseType: 'json' });
+    return this.httpClient.post(this.AUTHURL + `api/payment/post/${name}`, payload, { responseType: 'json' });
   }
 
   getAllPayments(): Observable<any> {

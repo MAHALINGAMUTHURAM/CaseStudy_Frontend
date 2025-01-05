@@ -579,4 +579,8 @@ table {
         .booking-form button:active {
           background-color: #003d82;
         }
+        .error {
+          color: red;
+          font-size: 0.9em;
+        }
         

@@ -24,10 +24,6 @@ export class Home4Component {
     guest_phone: '',
     checkInDate: new Date(),
     checkOutDate: new Date(),
-    user:{
-      username:'',
-      password:''
-    },
     room: {
       roomId: 0,
       roomNumber: 0,
@@ -42,6 +38,7 @@ export class Home4Component {
     }
   };
   isModalOpen = false;
+  name:any;
   payment:Payment=
   {
     reservation: this.reservation,
@@ -77,11 +74,12 @@ export class Home4Component {
 
   // Process payment method (uses the calculated price)
   processPayment(): void {
+    this.name=localStorage.getItem('name');
     console.log('yes');
     this.payment.amount = this.calculateTotalPrice();
 
         // After the reservation is saved, save the payment
-        this.paymentService.savePaymentAndReservation(this.reservation,this.payment).subscribe({
+        this.paymentService.savePaymentAndReservation(this.reservation,this.payment,this.name).subscribe({
           next: (paymentResponse) => {
             alert('Payment successful! Your reservation is confirmed.');
             // this.processPayment();

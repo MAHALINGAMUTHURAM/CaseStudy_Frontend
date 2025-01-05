@@ -35,10 +35,6 @@ export class Home3Component implements OnInit {
     guest_phone: '',
     checkInDate: new Date(),  // default to current date or use a date picker
     checkOutDate: new Date(), // default to current date or use a date picker
-    user:{
-      username:'',
-      password:''
-    },
 
     room: {
       roomId: 0,
@@ -88,20 +84,21 @@ export class Home3Component implements OnInit {
     this.hotelId = +this.activatedRoute.snapshot.params["hotelId"];  // Ensure the id is a number
     this.getHotelById();
     this.getReviewsByHotelId(this.hotelId);
-    this.name=localStorage.getItem('name');
+    // this.getUser();
   }
 
-  getUser()
-  {
-    this.userService.getByUserName(this.name).subscribe({
-      next: (data) => {
-        this.user = data;
-      },
-      error: (err) => {
-        alert(`Error fetching hotel details: ${err}`);
-      }
-    });
-  }
+  // getUser()
+  // {
+  //   this.userService.getByUserName(this.name).subscribe({
+  //     next: (data) => {
+  //       this.user = data;
+  //       console.log(this.user)
+  //     },
+  //     error: (err) => {
+  //       alert(`Error fetching hotel details: ${err}`);
+  //     }
+  //   });
+  // }
 
   getHotelById(): void {
     this.hotelService.getHotelById(this.hotelId,).subscribe({
@@ -123,13 +120,12 @@ export class Home3Component implements OnInit {
       },
       error: (err) => {
         this.checkRoom=true;
-        console.error('Error fetching rooms', err);
+        alert(err);
       }
     });
   }
   saveReservation(evt:any): void {
     evt.preventDefault();
-    this.reservation.user=this.user;
     this.reservation.checkInDate=this.startDate;
     this.reservation.checkOutDate=this.endDate;
     // this.reservationService.saveReservation(this.reservation).subscribe({

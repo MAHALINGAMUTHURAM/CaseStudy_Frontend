@@ -1,0 +1,53 @@
+
+<div class="container">
+    <h2>Amenities Management</h2>
+  
+    <!-- Amenity Form -->
+    <form [formGroup]="amenityForm" (ngSubmit)="submitAmenity()">
+      <div>
+        <label for="name">Amenity Name:</label>
+        <input id="name" formControlName="name" type="text" placeholder="Enter amenity name" name="name"/>
+      </div>
+      <div>
+        <label for="description">Description:</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          rows="4"
+          placeholder="Enter amenity description"
+          name="description"
+        ></textarea>
+      </div >
+      <button class="button-container" type="submit" class="btn btn-primary">{{ isEditing ? 'Update' : 'Add' }} Amenity</button>
+      <button  class="button-container" type="button" class="btn btn-secondary" (click)="resetForm()">Cancel</button>
+    </form>
+  
+    <!-- Amenity List -->
+    <div *ngIf="amenities.length > 0">
+      <h3>Amenities List</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let amenity of amenities">
+            <td>{{ amenity.name }}</td>
+            <td>{{ amenity.description }}</td>
+            <div class="button-container">
+                <button (click)="editAmenity(amenity.amenityId)">Edit</button>
+                <button (click)="deleteAmenity(amenity.id)">Delete</button>
+              </div>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div *ngIf="amenities.length === 0">
+      <p>No amenities available.</p>
+    </div>
+  </div>
+  

@@ -7,7 +7,7 @@ export const userGuard: CanActivateFn = (route, state) => {
   const token = localStorage.getItem('token');
   const role= localStorage.getItem('role');
 
-  if (token && role=='ROLE_USER') {
+  if (token && (role=='ROLE_MANAGER' || role=='ROLE_ADMIN'|| role=='ROLE_USER')) {
     return true;
   } else {
     router.navigate(['user/login']);

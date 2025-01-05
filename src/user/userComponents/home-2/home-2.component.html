@@ -39,21 +39,47 @@
 </div> -->
 <section class="search-bar1">
   <!-- Dropdown box -->
-  <select class="search-input" [(ngModel)]="selectedArea" (change)="onAreaChange()">
-    <option value="" disabled selected>Select a location</option>
-    <option *ngFor="let area of area" [value]="area.areaId">{{ area.name }}</option>
-  </select>
+  <label for="amenities" class="amenities-label">Select Location:</label>
+  <select
+class="search-input"
+[(ngModel)]="selectedArea"
+(change)="onAreaChange()"
+name="selectedArea"
+required
+#areaSelect="ngModel"
+>
+<option value="" disabled selected>Select a location</option>
+<option *ngFor="let area of area" [value]="area.areaId">{{ area.name }}</option>
+</select>
+<div *ngIf="areaSelect.invalid && areaSelect.touched" class="error">
+Please select a location.
+</div>
+ 
+<!-- Amenities Dropdown -->
+<div class="amenities-input" *ngIf="selectedArea">
 
-  <!-- Date input -->
-  <div class="amenities-input" *ngIf="selectedArea">
-   
-      <select id="amenities"[(ngModel)]="selectedAmenity" (change)="onAmenityChange()" class="search-input">
-        <option value="" disabled selected>Select amenities</option>
-        <option *ngFor="let amenity of amenities" [value]="amenity.amenityId">
-          {{ amenity.name }}
-        </option>
-      </select>
-    </div>
+     
+     
+     <label for="amenities" class="amenities-label">Select Amenities:</label>
+     
+<select
+  id="amenities"
+  [(ngModel)]="selectedAmenity"
+  (change)="onAmenityChange()"
+  class="search-input"
+  name="selectedAmenity"
+  required
+  #amenitySelect="ngModel"
+>
+  <option value="" disabled selected>Select amenities</option>
+  <option *ngFor="let amenity of amenities" [value]="amenity.amenityId">
+    {{ amenity.name }}
+  </option>
+</select>
+<div *ngIf="amenitySelect.invalid && amenitySelect.touched" class="error">
+  Please select an amenity.
+</div>
+</div>
   <!-- Guests input -->
   <select class="search-input">
     <option>2 adults · 0 children · 1 room</option>
@@ -87,7 +113,7 @@
      </div>
   <div class="result-item" *ngIf="hotels.length === 0">
    <!-- <div  class="mt-3"> -->
-      <p class="text-primary">Please select the location</p>
+      <p class="text-primary" style="text-align: center;">Please select the location</p>
     </div>
     </section>
 

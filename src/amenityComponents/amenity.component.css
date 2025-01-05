@@ -1,0 +1,176 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2, h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    margin-bottom: 20px;
+  }
+  
+  form div {
+    margin-bottom: 15px;
+  }
+  
+  input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #4CAF50;
+  }
+  
+  /* Buttons */
+ /* Button container to space out buttons */
+/* Button container to space out buttons side by side */
+.button-container {
+    display: flex; /* Use Flexbox for horizontal layout */
+    justify-content: flex-start; /* Align buttons to the left */
+    gap: 20px; /* Space between the buttons */
+    margin-top: 10px; /* Adjust top margin to provide some spacing */
+  }
+  
+  /* Individual button styles */
+  button {
+    background: linear-gradient(45deg, #0b4f97, #0b4f97); /* Green gradient */
+    color: white;
+    padding: 10px 10px; /* Larger buttons with more padding */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+  
+    text-transform: uppercase; /* Make text uppercase for more impact */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: all 0.3s ease; /* Smooth transition for all changes */
+    width: auto; /* Adjust button width based on content */
+  }
+  
+  /* Hover effect */
+  button:hover {
+    background: linear-gradient(45deg, #0b4f97, #0b4f97); /* Reverse gradient on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Increase shadow on hover for depth */
+    transform: translateY(-2px); /* Slight lift effect */
+  }
+  
+  button:active {
+    background: linear-gradient(45deg, #0b4f97, #0b4f97); /* Darker green on click */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Softer shadow on click */
+    transform: translateY(0); /* Reset lift effect when clicked */
+  }
+  
+  /* Delete button specific styling */
+  button + button {
+    background-color: #0b4f97; /* Red color for delete button */
+    background: linear-gradient(45deg, #0b4f97, #0b4f97); /* Red gradient */
+  }
+  
+  /* Hover effect for Delete button */
+  button + button:hover {
+    background: linear-gradient(45deg, #0b4f97, #0b4f97); /* Reverse red gradient on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Increase shadow on hover for depth */
+    transform: translateY(-2px); /* Lift effect on hover */
+  }
+  
+  button + button:active {
+    background: linear-gradient(45deg, #0b4f97, #0b4f97); /* Darker red on click */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Softer shadow on click */
+    transform: translateY(0); /* Reset lift effect when clicked */
+  }
+  
+  /* Table Styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  table th, table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  table th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  table td {
+    background-color: #fafafa;
+  }
+  
+  table td a {
+    color: #1E88E5;
+    text-decoration: none;
+  }
+  
+  table td a:hover {
+    text-decoration: underline;
+  }
+  
+  table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      max-width: 100%;
+      padding: 15px;
+    }
+  
+    input, textarea, select {
+      padding: 10px;
+      font-size: 14px;
+    }
+  
+    button {
+      padding: 8px 12px;
+    }
+  
+    table th, table td {
+      padding: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    h2, h3 {
+      font-size: 18px;
+    }
+  
+    button {
+      width: 100%;
+      padding: 12px;
+    }
+  
+    table {
+      font-size: 14px;
+    }
+  }
+  

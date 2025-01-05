@@ -9,5 +9,4 @@ export interface Reservation {
     checkInDate: Date; 
     checkOutDate: Date; 
     room: Room; 
-    user:User
 }

@@ -7,9 +7,13 @@ import { RoomType } from '../../../roomType/roomType';
 import { HotelService } from '../../../hotel/hotelService/hotel.service';
 import { AreaService } from '../../../user/area/areaService/area.service';
 import { RoomTypeService } from '../../../roomType/roomTypeService/room-type.service';
+import { HotelAmenityService } from '../../../hotelamenity/hotelamenityService/hotelamenity.service';
+import { AmenityService } from '../../../amenity/amenityService/amenity.service';
+import { RoomamenityService } from '../../../roomamenity/roomamenityService/roomamenity.service';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-hotel2',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,RouterLink],
   templateUrl: './hotel2.component.html',
   styleUrls: ['./hotel2.component.css']
 })
@@ -32,9 +36,16 @@ export class Hotel2Component implements OnInit {
   selectedRoomType:any;
   roomtypes:RoomType[]=[];
   //selectedArea: any;
-  area: any[] = [];    
+  area: any[] = [];
+  amenities: any[] = [];
+  selectedAmenity:any;
+  hotelAmenity:any={};
+  roomAmenity:any={};
+  isCreateRoomType: boolean = false;
+  isEditingRoomType = false;
+  newRoomType: any = {};
 
-  constructor(private hotelService: HotelService,private areaService: AreaService,private roomService:RoomService,private roomTypeService:RoomTypeService) {}
+  constructor(private hotelService: HotelService,private areaService: AreaService,private roomService:RoomService,private roomTypeService:RoomTypeService,private hotelAmenityService:HotelAmenityService,private amenityService:AmenityService,private roomAmenityService:RoomamenityService) {}
 
   ngOnInit(): void {
     this.getAllHotels(); // Fetch all hotels on component initialization
@@ -62,13 +73,32 @@ export class Hotel2Component implements OnInit {
       }
     });
   }
+  saveRoomType() {
+   
+    this.roomTypeService.saveRoomType(this.newRoomType).subscribe((response: any) => {
+      console.log('Room type created successfully', response);
+      this.isCreateRoomType = false;
+      this.newRoomType = {};
+      this.getAllRoomTypes();
+    });
+  }
+  updateRoomType() {
+ 
+    this.roomTypeService.updateRoomType(this.selectedRoomType.id,this.selectedRoomType).subscribe((response: any) => {
+      console.log('Room type updated successfully', response);
+      this.isEditingRoomType = false;
+      this.getAllRoomTypes();
+    });
+  }
 
   // Prepare hotel data for editing
   editHotel(hotel: any): void {
     this.isEditingHotel = true;
+    this.getAllRoomTypes();
     this.selectedHotel = { ...hotel }; // Create a copy to prevent direct modifications
     this.hotelId=this.selectedHotel.hotelId;
-    this.isEditingRoom=false;
+    this.getAllAmenity();
+    // this.isEditingRoom=false;
     this.getAllRooms();
   }
 
@@ -87,11 +117,11 @@ export class Hotel2Component implements OnInit {
 
   // Update hotel
   updateHotel(): void {
-    if (this.selectedHotel.id) {
-      this.hotelService.updateHotel(this.selectedHotel.id, this.selectedHotel).subscribe({
+    // if (this.selectedHotel.id) {
+      this.hotelService.updateHotel(this.selectedHotel.hotelId, this.selectedHotel).subscribe({
         next: (response) => {
           this.showEditForm=false;
-          console.log('Hotel updated successfully', response);
+          alert('Hotel updated successfully!');
           this.getAllHotels(); // Refresh the list
           this.isEditingHotel = false; // Exit editing mode
         },
@@ -99,7 +129,11 @@ export class Hotel2Component implements OnInit {
           console.error('Error updating hotel', err);
         }
       });
-    }
+    // }
+  }
+  editRoomType(roomtype: any) {
+    this.selectedRoomType = { ...roomtype }; // Set selected room type for editing
+    this.isEditingRoomType = true; // Show edit form
   }
 
   // Cancel editing
@@ -149,9 +183,10 @@ export class Hotel2Component implements OnInit {
       console.log(this.selectedRoom);
       this.roomService.updateRoom(this.selectedRoom.roomId,this.selectedRoom).subscribe({
         next: (response) => {
-          console.log('Room updated successfully', response);
+          alert('Room updated successfully!');
           this.getAllRooms();
-          this.selectedRoom = null;
+          this.isEditingRoom=false;
+          // this.selectedRoom = null;
         },
         error: (err) => {
           console.error('Error updating room', err);
@@ -162,10 +197,14 @@ export class Hotel2Component implements OnInit {
 
   createRoom(): void {
     this.room.roomtype=this.selectedRoomType;
+    this.room.available=true;
+    this.room.hotel=this.selectedHotel;
     console.log(this.room);
     // if (this.room.roomNumber && this.room.location && this.room.roomtype) {
       this.roomService.saveRoom(this.room).subscribe((e) => {
+        this.getAllRooms();
         alert('Room created successfully!'); // Reload rooms after creation
+        this.isTrue=false;
       }, error => {
         alert('Error creating room: ' + error.message);
       });
@@ -173,27 +212,77 @@ export class Hotel2Component implements OnInit {
     //   alert('Please fill in all room details.');
     // }
   }
+  cancelAddRoom()
+  {
+    this.isTrue=false;
+  }
   isCreate()
   {
     this.isTrue=true;
 
-
   }
   cancel()
   {
+    this.isEditingHotel=false;
     this.isCreateHotel=false;
+    this.rooms=[];
+    this.isCreateRoomType=false;
+    this.isEditingRoomType=false;
   }
   isHotel()
   {
     this.getAllAreas();
-    this.getAllRoomTypes();
     this.isCreateHotel=true;
   }
   saveHotel()
   {
     this.hotel.area=this.selectedArea;
     console.log(this.hotel.area.name);
-    this.hotelService.saveHotel(this.hotel).subscribe((e)=>alert(e));
+    this.hotelService.saveHotel(this.hotel).subscribe((e)=>{
+    this.isCreateHotel=false;
+    this.getAllHotels();
+    alert('Hotel Created Successfully!')
+  }
+    );
+  }
+
+  saveHotelAmenity()
+  {
+    // console.log(this.selectedHotel);
+    this.hotelAmenity.hotel=this.selectedHotel;
+    this.hotelAmenity.amenity=this.selectedAmenity;
+    // console.log(this.hotel.area.name);
+    this.hotelAmenityService.saveHotelAmenity(this.hotelAmenity).subscribe((e)=>{
+    this.isCreateHotel=false;
+    this.getAllHotels();
+    alert('HotelAmenity Created Successfully!')
+  }
+    );
+  }
+
+  saveRoomAmenity()
+  {
+    // console.log(this.selectedHotel);
+    this.roomAmenity.room=this.selectedRoom;
+    this.roomAmenity.amenity=this.selectedAmenity;
+    // console.log(this.hotel.area.name);
+    this.roomAmenityService.saveRoomAmenity(this.roomAmenity).subscribe((e)=>{
+    this.isEditingRoom=false;
+    this.getAllHotels();
+    alert('RoomAmenity Created Successfully!')
+  }
+    );
+  }
+
+  getAllAmenity() {
+    this.amenityService.getAllAmenities().subscribe(
+      (data) => {
+        this.amenities = data;
+      },
+      (error) => {
+        console.error('Error fetching areas', error);
+      }
+    );
   }
 
   getAllAreas() {

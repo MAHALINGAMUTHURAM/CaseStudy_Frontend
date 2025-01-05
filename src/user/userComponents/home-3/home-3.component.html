@@ -138,12 +138,36 @@ Rooms Available Section -->
 
       <!-- Date input -->
       <div class="date-inputs">
-          <label for="checkin">Check-in:</label>
-          <input type="date" id="checkin" [(ngModel)]="startDate" class="search-input">
-       
-          <label for="checkout">Check-out:</label>
-          <input type="date" id="checkout" [(ngModel)]="endDate" class="search-input">
+        <label for="checkin">Check-in:</label>
+        <input
+          type="date"
+          id="checkin"
+          [(ngModel)]="startDate"
+          class="search-input"
+          required
+          #checkin="ngModel"
+        />
+        <div *ngIf="checkin.invalid && checkin.touched" class="error">
+          Please select a check-in date.
         </div>
+     
+        <label for="checkout">Check-out:</label>
+        <input
+          type="date"
+          id="checkout"
+          [(ngModel)]="endDate"
+          class="search-input"
+          required
+          #checkout="ngModel"
+          [min]="startDate"
+        />
+        <div *ngIf="checkout.invalid && checkout.touched" class="error">
+          Please select a check-out date.
+        </div>
+        <div *ngIf="endDate && startDate && endDate < startDate" class="error">
+          Check-out date must be later than check-in date.
+        </div>
+      </div>
 
       <!-- Guests input -->
       <select class="search-input1">
@@ -277,8 +301,8 @@ Rooms Available Section -->
 <div *ngIf="!checkRoom">
   <h1 style="text-align: center;">please select Date Range</h1>
 </div>
-<div *ngIf="checkRoom">
-  <p>No rooms available</p>
+<div *ngIf="checkRoom && rooms.length==0">
+  <p class="text-danger" style="align-content:center;">No rooms available</p>
 </div>
   <section class="room-table" *ngFor="let room of rooms">
     <table>
@@ -364,24 +388,49 @@ Rooms Available Section -->
       </tbody>
     </table>
     <div *ngIf="selectedRoom" class="booking-form">
-  <h3>Booking Form for Room Number: {{ selectedRoom.roomNumber }}</h3>
-  <form (ngSubmit)="saveReservation($event)">
-    <label for="guestName">Guest Name:</label>
-    <input type="text" id="guestName" [(ngModel)]="reservation.guest_name" name="guestName" required />
-    
-    <label for="guestEmail">Guest Email:</label>
-    <input type="email" id="guestEmail" [(ngModel)]="reservation.guest_email" name="guestEmail" required />
-    
-    <label for="guestPhone">Guest Phone:</label>
-    <input type="tel" id="guestPhone" [(ngModel)]="reservation.guest_phone" name="guestPhone" required /> 
-    
-    <!-- <label for="checkInDate">Check-In Date:</label>
-    <input type="date" id="checkInDate" [(ngModel)]="reservation.checkInDate" name="checkInDate" required />
-    
-    <label for="checkOutDate">Check-Out Date:</label>
-    <input type="date" id="checkOutDate" [(ngModel)]="reservation.checkOutDate" name="checkOutDate" required /> -->
-    
-    <button type="submit">Submit Reservation</button>
+      <h3>Booking Form for Room Number: {{ selectedRoom.roomNumber }}</h3>
+      <form (ngSubmit)="saveReservation($event)" #reservationForm="ngForm">
+        <label for="guestName">Guest Name:</label>
+        <input
+          type="text"
+          id="guestName"
+          [(ngModel)]="reservation.guest_name"
+          name="guestName"
+          required
+          #guestName="ngModel"
+        />
+        <div *ngIf="guestName.invalid && guestName.touched" class="error">
+          Guest name is required.
+        </div>
+     
+        <label for="guestEmail">Guest Email:</label>
+        <input
+          type="email"
+          id="guestEmail"
+          [(ngModel)]="reservation.guest_email"
+          name="guestEmail"
+          required
+          email
+          #guestEmail="ngModel"
+        />
+        <div *ngIf="guestEmail.invalid && guestEmail.touched" class="error">
+          Please enter a valid email address.
+        </div>
+     
+        <label for="guestPhone">Guest Phone:</label>
+        <input
+          type="tel"
+          id="guestPhone"
+          [(ngModel)]="reservation.guest_phone"
+          name="guestPhone"
+          required
+          pattern="^\+?[0-9]{1,4}?[-.\s]?(?:\(?\d{1,3}?\)?[-.\s]?)?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$"
+          #guestPhone="ngModel"
+        />
+        <div *ngIf="guestPhone.invalid && guestPhone.touched" class="error">
+          Please enter a valid phone number.
+        </div>
+        <button type="submit" [disabled]="reservationForm.invalid">Submit Reservation</button>
   </form>
 </div>
     <h2>House Rules</h2>
@@ -503,7 +552,7 @@ Rooms Available Section -->
            <div class="name"><img src="assets\OIP (7).jpg" alt="Steven">Anonymous</div>
            <div class="country">{{ review.reviewDate }}</div>
            <p>{{ review.comment }}</p>
-           <p>{{ review.rating }}</p>
+           <p>{{ review.rating }} ★</p>
        </div>
        <!-- <div class="review">
            <div class="name"><img src="image.png" alt="Alice">Alice</div>

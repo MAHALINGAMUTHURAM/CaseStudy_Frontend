@@ -18,10 +18,13 @@ export class UserRegisterComponent {
     username:'',
     password:'',
   }
+  passwordMismatch: boolean = false;
+
 
   constructor(private userService:UserService,private router:Router){}
 
   saveUser() {
+    
     this.userService.saveUser(this.user).subscribe(
       (response) => {
         alert(JSON.stringify(response)); 

@@ -3,9 +3,10 @@ import { AuthenticateUser } from '../../../user/model/AuthenticateUser';
 import { UserService } from '../../../user/userService/user.service';
 import { CommonModule } from '@angular/common';
 import {FormsModule} from '@angular/forms'
+import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-admin-login',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,RouterLink],
   templateUrl: './admin-login.component.html',
   styleUrl: './admin-login.component.css'
 })
@@ -20,7 +21,7 @@ export class AdminLoginComponent {
 
   token:any;
 
-  constructor(private userService:UserService){}
+  constructor(private userService:UserService,private router:Router){}
 
   loginUser() {
     this.login.role="ROLE_ADMIN"
@@ -29,6 +30,8 @@ export class AdminLoginComponent {
     alert(JSON.stringify(e));
     localStorage.setItem('token',this.token);
     localStorage.setItem('role',this.login.role)
+    localStorage.setItem('name',this.login.userName+' Admin')
+    this.router.navigate(['/adminDashboard']);
     },
     (error) => {
       console.error('Error saving user:', error);

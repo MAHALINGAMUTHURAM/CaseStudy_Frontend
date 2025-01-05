@@ -153,7 +153,7 @@ color: black; /* Change text to black on hover */
  margin-top: 90px; /* Adds spacing around the div */
  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Adds a shadow for a 3D effect */
  height:400px;
- animation: fadeInHomeText 10s ease-in-out; /* Apply fade-in animation */
+ animation: fadeInHomeText 5s ease-in-out; /* Apply fade-in animation */
 
 
  
@@ -529,15 +529,15 @@ header p {
   top: 50%; /* Position vertically */
   right: -300px; /* Start the balloon off-screen to the right */
   z-index: 2;
-  animation: flyBalloon 6s ease-in-out forwards; /* Balloon moves from right to left */
+  animation: flyBalloon 3s ease-in-out forwards; /* Balloon moves from right to left */
 }
-
+ 
 .balloon {
   width: 600px; /* Adjust the size of the balloon */
   height: auto;
   background-color: transparent; /* Ensure balloon background is transparent */
 }
-
+ 
 @keyframes flyBalloon {
   0% {
       transform: translateX(0); /* Start at the right edge of the screen */
@@ -547,7 +547,7 @@ header p {
       opacity: 0; /* Balloon disappears after reaching the left edge */
   }
 }
-
+ 
  
 /* Welcome message styling */
 .welcome-message {
@@ -562,20 +562,12 @@ header p {
   opacity: 0; /* Initially hide the message */
   font-size: 40px; /* Font size for the text */
 }
-
+ 
 .welcome-message h1, .welcome-message p {
   margin: 10px;
 }
  
 /* Word animation for progressive appearance */
-.word {
-  opacity: 0; /* Words are initially hidden */
-  display: inline-block;
-  transition: opacity 1s ease-in-out;
-  font-weight: bold;
-  margin: 0 10px;
-}
- 
 /* Optional: Style for the words */
 .word:nth-child(even) {
   color: rgb(255, 255, 255); /* Keep text black for even words */
@@ -584,3 +576,42 @@ header p {
 .word:nth-child(odd) {
   color: rgb(255, 255, 255); /* Keep text black for odd words */
 }
+
+.welcome-message h1, .welcome-message p {
+  margin: 10px;
+}
+ 
+/* Word animation for progressive appearance */
+.word {
+  opacity: 0; /* Initially hidden */
+  display: inline-block;
+  font-weight: bold;
+  margin: 0 10px;
+  animation: fadeInWord 1s ease-in-out forwards;
+}
+ 
+.word:nth-child(1) {
+  animation-delay: 0s; /* No delay for the first word */
+}
+ 
+.word:nth-child(2) {
+  animation-delay: 0.5s; /* Delay for the second word */
+}
+ 
+.word:nth-child(3) {
+  animation-delay: 1s; /* Delay for the third word */
+}
+ 
+/* Add as many nth-child rules as needed for the number of words */
+ 
+/* Animation keyframes */
+@keyframes fadeInWord {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+ 
+ 

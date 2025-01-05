@@ -1,41 +1,66 @@
-<div class="container">
-    <h1>Admin Dashboard</h1>
-
-    <!-- User List -->
-    <h2>User List</h2>
-    <div class="list-container" id="userList">
-        <div class="list-item">
-            <h3>John Doe</h3>
-            <button class="btn" onclick="makeManager('John Doe')">Make as Manager</button>
-        </div>
-        <div class="list-item">
-            <h3>Jane Smith</h3>
-            <button class="btn" onclick="makeManager('Jane Smith')">Make as Manager</button>
-        </div>
-        <div class="list-item">
-            <h3>Robert Brown</h3>
-            <button class="btn" onclick="makeManager('Robert Brown')">Make as Manager</button>
+<div class="body-container">
+    <div class="container">
+        <h2>Admin Sign In</h2>
+        <p>You can sign in using your account to access our services.</p>
+        <form #loginForm="ngForm" class="sign-in-form" (ngSubmit)="loginUser()">
+            <!-- Username Input -->
+            <input
+              type="text"
+              placeholder="Enter your Username Buddy!"
+              [(ngModel)]="login.userName"
+              name="userName"
+              #userNameField="ngModel"
+              required
+            />
+            <div *ngIf="userNameField.invalid && userNameField.touched" class="error">
+              Username is required.
+            </div>
+         
+            <!-- Password Input -->
+            <input
+              type="password"
+              placeholder="Enter your Password"
+              [(ngModel)]="login.password"
+              name="password"
+              #passwordField="ngModel"
+              required
+            />
+            <div *ngIf="passwordField.invalid && passwordField.touched" class="error">
+              Password is required.
+            </div>
+         
+            <!-- Submit Button -->
+            <div class="continue-box">
+              <button type="submit" class="continue-btn" [disabled]="loginForm.invalid">
+                Continue da!
+              </button>
+            </div>
+         
+            <!-- Register Prompt -->
+            <div class="signin-prompt">
+              Don't have an account?
+              <a href="/user/register" [routerLink]="'/user/register'">Create new</a>
+            </div>
+          </form>
+        <div class="social-login">
+            <p>Or sign in with:</p>
+            <div class="social-buttons">
+                <div class="social-box">
+                    <button class="social-btn google">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREDznX-giJlcrcieBqW2p_8bvy0_iVwgZ_Lz-szKxP7eeOvY4kQYayVfTH7FdzZ4OHMyI&usqp=CAU" alt="Google Logo" class="social-logo"> 
+                    </button>
+                </div>
+                <div class="social-box">
+                    <button class="social-btn apple">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo" class="social-logo"> 
+                    </button>
+                </div>
+                <div class="social-box">
+                    <button class="social-btn facebook">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo" class="social-logo"> 
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-
-    <!-- Manager List -->
-    <h2>Manager List</h2>
-    <div class="list-container" id="managerList">
-        <div class="list-item">
-            <h3>Emily Davis</h3>
-            <button class="btn" onclick="removeManager('Emily Davis', this)">Remove</button>
-        </div>
-        <div class="list-item">
-            <h3>Michael Johnson</h3>
-            <button class="btn" onclick="removeManager('Michael Johnson', this)">Remove</button>
-        </div>
-        <div class="list-item">
-            <h3>Sarah Wilson</h3>
-            <button class="btn" onclick="removeManager('Sarah Wilson', this)">Remove</button>
-        </div>
-    </div>
-
-    <footer>
-        &copy; 2025 User Management System
-    </footer>
 </div>

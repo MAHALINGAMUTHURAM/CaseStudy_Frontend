@@ -1,0 +1,137 @@
+<div style="padding: 50px;">
+<div class="get-payment-by-id">
+  <h3 style="text-align: center;">Get Payment by ID</h3>
+  <input 
+    type="number" 
+    [(ngModel)]="paymentId" 
+    placeholder="Enter Payment ID" 
+    class="form-control" />
+  <button (click)="getPaymentById()" class="btn btn-primary">Fetch Payment</button>
+</div>
+<div *ngIf="selectedPayment" class="payment-details">
+  <h3>Payment Details</h3>
+  <p><strong>Payment ID:</strong> {{ selectedPayment.payment_id }}</p>
+  
+  <p><strong>Amount:</strong> {{ selectedPayment.amount }}</p>
+  <p><strong>Date:</strong> {{ selectedPayment.payment_date | date }}</p>
+  <p><strong>Status:</strong> {{ selectedPayment.paymentStatus }}</p>
+</div>
+<!-- <div class="get-payments-by-status">
+  <h3>Get Payments by Status</h3>
+  <input 
+    type="text" 
+    [(ngModel)]="paymentStatus" 
+    placeholder="Enter Payment Status (e.g., PAID, PENDING)" 
+    class="form-control" />
+  <button (click)="fetchPaymentsByStatus()" class="btn btn-primary">Fetch Payments</button>
+</div> -->
+<div *ngIf="payments.length > 0" class="payments-list">
+  <h3 style="text-align: center;">Payments with status: <span style="color: blueviolet;">{{ paymentStatus }}</span></h3>
+  <!-- <table>
+    <thead>
+      <tr>
+        <th>Payment ID</th>
+        <th>Amount</th>
+        <th>Payment Date</th>
+        <th>Payment Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let payment of payments">
+        <td>{{ payment.payment_id }}</td>
+        <td>{{ payment.amount }}</td>
+        <td>{{ payment.paymentDate }}</td>
+        <td>{{ payment.paymentStatus }}</td>
+      </tr>
+    </tbody>
+  </table> -->
+</div>
+
+<div class="payment-section">
+  <!-- <h2>Payments</h2> -->
+
+  <!-- Payment Status Dropdown -->
+  <div>
+    <label for="status">Select Payment Status:</label>
+    <select id="status" [(ngModel)]="paymentStatus" (change)="fetchPaymentsByStatus()">
+      <option value="" disabled selected>Select a status</option>
+      <option *ngFor="let status of paymentStatuses" [value]="status">{{ status }}</option>
+    </select>
+  </div>
+
+  <!-- Payments Table -->
+  <div *ngIf="payments && payments.length > 0">
+    <h3>Payments List</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Payment ID</th>
+          <th>Amount</th>
+          <th>Payment Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of payments">
+          <td>{{ payment.payment_id }}</td>
+          <td>{{ payment.amount | currency }}</td>
+          <td>{{ payment.payment_date | date }}</td>
+          <td>{{ payment.paymentStatus }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Total Revenue Display -->
+    <div *ngIf="totalRevenue >0">
+      <h4 style="color: green;">Total Revenue: {{ totalRevenue | currency }}</h4>
+    </div>
+  </div>
+
+  <!-- If no payments found -->
+  <div *ngIf="payments && payments.length === 0">
+    <p>No payments found for the selected status.</p>
+  </div>
+</div>
+
+<div class="show-payments">
+  <button (click)="getAllPayments()" class="btn btn-primary">Show All Payments</button>
+</div>
+
+<div *ngIf="isPaymentsVisible" class="payments-container">
+  <h3 style="text-align:center;">All Payments</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Payment ID</th>
+        <th>Amount</th>
+        <th>Payment Date</th>
+        <!-- <th>Status</th> -->
+        <th>Actions</th> <!-- Added column for actions -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let payment of payments">
+        <td>{{ payment.payment_id }}</td>
+        <td>{{ payment.amount | currency }}</td>
+        <td>{{ payment.payment_date | date: 'yyyy-MM-dd' }}</td>
+        <!-- <td
+          [ngClass]="{
+            paid: payment.status === 'PAID',
+            pending: payment.status === 'PENDING'
+          }"
+        >
+          {{ payment.status }}
+        </td> -->
+        <td>
+          <button style="background-color: red;"
+            (click)="deletePayment(payment.payment_id)"
+            class="btn btn-danger"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>

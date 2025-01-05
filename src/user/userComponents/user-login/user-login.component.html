@@ -2,16 +2,50 @@
     <div class="container">
         <h2>Sign In</h2>
         <p>You can sign in using your account to access our services.</p>
-        <form class="sign-in-form" (submit)="loginUser()">
-            <input type="text" placeholder="Enter your Username Buddy!" [(ngModel)]="login.userName" name="userName" required>
-            <input type="password" placeholder="Enter your Password" [(ngModel)]="login.password" name="password" required>
+        <form #loginForm="ngForm" class="sign-in-form" (ngSubmit)="loginUser()">
+            <!-- Username Input -->
+            <input
+              type="text"
+              placeholder="Enter your Username Buddy!"
+              [(ngModel)]="login.userName"
+              name="userName"
+              #userNameField="ngModel"
+              required
+            />
+            <div *ngIf="userNameField.invalid && userNameField.touched" class="error">
+              Username is required.
+            </div>
+         
+            <!-- Password Input -->
+            <!-- <label for="password">Password</label> -->
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              placeholder="Password"
+              required 
+              [(ngModel)]="login.password" 
+              #password="ngModel"
+              minlength="8"
+            />
+            <div *ngIf="password.invalid && password.touched">
+              <small *ngIf="password.errors?.['required']" style="color: red;">Password is required.</small>
+              <small *ngIf="password.errors?.['minlength']" style="color: red;">Password must be at least 8 characters long.</small>
+            </div>
+         
+            <!-- Submit Button -->
             <div class="continue-box">
-                <button type="submit" class="continue-btn">Continue da!</button>
+              <button type="submit" class="continue-btn" [disabled]="loginForm.invalid">
+                Continue da!
+              </button>
             </div>
+         
+            <!-- Register Prompt -->
             <div class="signin-prompt">
-                Don't have an account <a href='/user/register' [routerLink]="'/user/register'">Create new</a>
+              Don't have an account?
+              <a href="/user/register" [routerLink]="'/user/register'">Create new</a>
             </div>
-        </form>
+          </form>
         <div class="social-login">
             <p>Or sign in with:</p>
             <div class="social-buttons">
@@ -31,6 +65,8 @@
                     </button>
                 </div>
             </div>
+            <a href="/admin/login" [routerLink]="'/admin/login'" style="margin-right: 5px;">Admin</a>
+            <a href="/manager/login" [routerLink]="'/manager/login'">Manager</a>
         </div>
     </div>
 </div>

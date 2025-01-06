@@ -24,14 +24,17 @@ export class ManagerLoginComponent {
   constructor(private userService:UserService,private router:Router){}
 
   loginUser() {
+    const expirationTime = new Date().getTime() + (60 * 60 * 1000);
+
     this.login.role="ROLE_MANAGER"
     console.log(this.login);
     this.userService.loginUser(this.login).subscribe((e)=>{
     this.token=e.token;
-    alert(JSON.stringify(e));
+    //alert(JSON.stringify(e));
     localStorage.setItem('token',this.token);
     localStorage.setItem('role',this.login.role)
     localStorage.setItem('name',this.login.userName+' manager')
+    localStorage.setItem('tokenExpiration', expirationTime.toString());
     this.router.navigate(['/managerDashboard']);
     },
     (error) => {

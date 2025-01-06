@@ -107,14 +107,14 @@ export class Home4Component {
 payNow() {
   const RazorpayOptions = {
     key: 'rzp_test_zWhcqYLonnFntk',
-    amount: this.calculateTotalPrice()*100,
+    amount: (this.calculateTotalPrice())*100,
     currency: 'INR',
     name: 'Hotel Booking',
     description: 'Sample Razorpay demo',
     image: 'https://i.imgur.com/FApqk3D.jpeg',
         prefill: {
-          name: 'Book Inventory',
-          email: 'sam@gmail.com',
+          name: 'Hotel Booking',
+          email: 'muthu@gmail.com',
           contact: '9898989898'
         },
         theme: {
